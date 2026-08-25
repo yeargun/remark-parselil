@@ -1,0 +1,231 @@
+export extern class ParseOptions {
+  JsValue gfm;
+  JsValue breaks;
+  JsValue math;
+  JsValue allowDangerousHtml;
+  JsValue singleTilde;
+}
+
+export extern class ParseHost {
+  JsValue parser;
+  JsValue data;
+}
+
+export class Flags {
+  bool gfm;
+  bool breaks;
+  bool math;
+  bool allowDangerousHtml;
+  bool singleTilde;
+
+  init(bool gfm, bool breaks, bool math, bool allowDangerousHtml, bool singleTilde) {
+    this.gfm = gfm;
+    this.breaks = breaks;
+    this.math = math;
+    this.allowDangerousHtml = allowDangerousHtml;
+    this.singleTilde = singleTilde;
+  }
+}
+
+export bool optionFlag(JsValue value, bool fallback) {
+  if (JS.isUndefined(value) || JS.isNullish(value)) {
+    return fallback;
+  }
+  return value.truthy();
+}
+
+export JsValue jsNull() {
+  return JSON.parse("null");
+}
+
+export int arrLen(JsValue arr) {
+  return JS.number(arr["length"]).toInt();
+}
+
+export void pushNode(JsValue arr, JsValue item) {
+  JS.push(arr, item);
+}
+
+export string asString(JsValue value) {
+  if (value is string) {
+    return value;
+  }
+  if (JS.isUndefined(value) || JS.isNullish(value)) {
+    return "";
+  }
+  return JS.string(value);
+}
+
+export string nodeType(JsValue node) {
+  JsValue t = node["type"];
+  if (t is string) {
+    return t;
+  }
+  return "";
+}
+
+export string docText(JsValue doc, JsValue file) {
+  if (doc is string) {
+    return doc;
+  }
+  JsValue dv = JS.get(doc, "value");
+  if (dv is string) {
+    return dv;
+  }
+  if (file is string) {
+    return file;
+  }
+  JsValue fv = JS.get(file, "value");
+  if (fv is string) {
+    return fv;
+  }
+  if (JS.isUndefined(doc) || JS.isNullish(doc)) {
+    return "";
+  }
+  return JS.string(doc);
+}
+
+export bool isWs(int c) {
+  return c == 32 || c == 9 || c == 10 || c == 13;
+}
+
+export bool isDigit(int c) {
+  return c >= 48 && c <= 57;
+}
+
+export bool isAlpha(int c) {
+  return (c >= 65 && c <= 90) || (c >= 97 && c <= 122);
+}
+
+export bool isAlnum(int c) {
+  return isAlpha(c) || isDigit(c);
+}
+
+export bool isBlank(string line) {
+  int i = 0;
+  int n = line.length;
+  while (i < n) {
+    int c = line.charCodeAt(i);
+    if (c != 32 && c != 9) {
+      return false;
+    }
+    i = i + 1;
+  }
+  return true;
+}
+
+export int leadSpaces(string line) {
+  int n = 0;
+  int i = 0;
+  int len = line.length;
+  while (i < len) {
+    int c = line.charCodeAt(i);
+    if (c == 32) {
+      n = n + 1;
+    } else if (c == 9) {
+      n = n + (4 - n % 4);
+    } else {
+      break;
+    }
+    i = i + 1;
+  }
+  return n;
+}
+
+export string skipSpaces(string line, int spaces) {
+  int n = 0;
+  int i = 0;
+  int len = line.length;
+  while (i < len && n < spaces) {
+    int c = line.charCodeAt(i);
+    if (c == 32) {
+      n = n + 1;
+      i = i + 1;
+    } else if (c == 9) {
+      n = n + (4 - n % 4);
+      i = i + 1;
+    } else {
+      break;
+    }
+  }
+  return line.slice(i);
+}
+
+export string trimLine(string line) {
+  return line.trim();
+}
+
+export string joinLines(string[] lines) {
+  string out = "";
+  int i = 0;
+  while (i < lines.length) {
+    if (i > 0) {
+      out = out + "\n";
+    }
+    out = out + lines[i];
+    i = i + 1;
+  }
+  return out;
+}
+
+export string normalizeDoc(string src) {
+  Regex crlf = new Regex("\r\n", "g");
+  crlf.lastIndex = 0;
+  string a = src.replace(crlf, "\n");
+  Regex cr = new Regex("\r", "g");
+  cr.lastIndex = 0;
+  return a.replace(cr, "\n");
+}
+
+export string normId(string id) {
+  string t = id.trim().toLowerCase();
+  Regex ws = new Regex("[ \t\n]+", "g");
+  ws.lastIndex = 0;
+  return t.replace(ws, " ");
+}
+
+export string unescapeText(string src) {
+  string out = "";
+  int i = 0;
+  int n = src.length;
+  while (i < n) {
+    int c = src.charCodeAt(i);
+    if (c == 92 && i + 1 < n) {
+      out = out + src.charAt(i + 1);
+      i = i + 2;
+    } else {
+      out = out + src.charAt(i);
+      i = i + 1;
+    }
+  }
+  return out;
+}
+
+export Flags mergeFlags(JsValue options, JsValue settings) {
+  ParseOptions direct = JS.assume(JS.object());
+  ParseOptions fromData = JS.assume(JS.object());
+  if (!JS.isUndefined(options) && !JS.isNullish(options)) {
+    direct = JS.assume(options);
+  }
+  if (!JS.isUndefined(settings) && !JS.isNullish(settings)) {
+    fromData = JS.assume(settings);
+  }
+  bool gfm = optionFlag(direct.gfm, optionFlag(fromData.gfm, false));
+  bool breaks = optionFlag(direct.breaks, optionFlag(fromData.breaks, false));
+  bool math = optionFlag(direct.math, optionFlag(fromData.math, false));
+  bool html = optionFlag(direct.allowDangerousHtml, optionFlag(fromData.allowDangerousHtml, false));
+  bool tilde = optionFlag(direct.singleTilde, optionFlag(fromData.singleTilde, false));
+  return new Flags(gfm, breaks, math, html, tilde);
+}
+
+export JsValue readSettings(JsValue self) {
+  ParseHost host = JS.assume(self);
+  JsValue dataFn = host.data;
+  if (JS.typeOf(dataFn) == "function") {
+    JsValue bag = JS.call(dataFn, self);
+    if (!JS.isUndefined(bag) && !JS.isNullish(bag)) {
+      return JS.get(bag, "settings");
+    }
+  }
+  return JS.undefined();
+}

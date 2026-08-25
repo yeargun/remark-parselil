@@ -1,0 +1,67 @@
+{
+  "name": "@itslil/remark-parse",
+  "version": "11.0.0",
+  "description": "remark-parse reimplemented in LilScript",
+  "keywords": [
+    "remark",
+    "markdown",
+    "parse",
+    "mdast",
+    "lilscript",
+    "itslil"
+  ],
+  "homepage": "https://yeargun.github.io/remark-parselil/",
+  "bugs": "https://github.com/yeargun/remark-parselil/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeargun/remark-parselil.git"
+  },
+  "license": "MIT",
+  "author": "yeargun",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./dist/remark-parse.cjs",
+  "module": "./dist/remark-parse.esm.js",
+  "types": "./dist/remark-parse.d.ts",
+  "unpkg": "./dist/remark-parse.umd.js",
+  "jsdelivr": "./dist/remark-parse.umd.js",
+  "exports": {
+    ".": {
+      "types": "./dist/remark-parse.d.ts",
+      "import": "./dist/remark-parse.esm.js",
+      "require": "./dist/remark-parse.cjs",
+      "default": "./dist/remark-parse.esm.js"
+    },
+    "./closed": "./dist/remark-parse.closed.js",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist/remark-parse.esm.js",
+    "dist/remark-parse.cjs",
+    "dist/remark-parse.umd.js",
+    "dist/remark-parse.closed.js",
+    "dist/remark-parse.d.ts",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs --compile",
+    "build:site": "node scripts/build-site.mjs",
+    "test": "node --test test/*.test.mjs",
+    "check:site": "npm run build:site && node --test test/site.test.mjs",
+    "check:pack": "node scripts/check-pack.mjs",
+    "prepublishOnly": "npm test && npm run check:pack && npm run check:site"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  }
+}

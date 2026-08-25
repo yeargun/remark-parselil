@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="remark-parse reimplemented in LilScript. Installs a parser that reads <code>gfm</code> from options or <code>data().settings</code> at parse time — so <code>remarkGfm</code> can flip it later." />
+    <title>@itslil/remark-parse — LilScript lab</title>
+    
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header class="nav shell">
+      <a class="wordmark" href="#top">
+        <span class="mark">rp</span>
+        <span>@itslil/remark-parse</span>
+      </a>
+      <nav>
+        <a href="#lab">lab</a>
+        <a href="https://www.npmjs.com/package/@itslil/remark-parse">npm</a>
+        <a href="https://github.com/yeargun/remark-parselil">GitHub</a>
+      </nav>
+    </header>
+    <main id="top">
+      <section class="hero shell">
+        <p class="eyebrow">@itslil/remark-parse · LilScript · zero runtime deps</p>
+        <h1>remark,<br />parse.</h1>
+        <p class="lede">remark-parse reimplemented in LilScript. Installs a parser that reads <code>gfm</code> from options or <code>data().settings</code> at parse time — so <code>remarkGfm</code> can flip it later.</p>
+        <div class="install-row">
+          <code>npm install @itslil/remark-parse</code>
+          <button class="copy" type="button" data-copy="npm install @itslil/remark-parse">copy</button>
+        </div>
+      </section>
+      <section class="ticker" aria-label="Features">
+        <div>parser<span>✦</span>gfm at parse time<span>✦</span>breaks newlines<span>✦</span>660 corpus<span>✦</span>tree-shake</div>
+      </section>
+      <section class="lab shell" id="lab">
+        <h2>Live lab</h2>
+        <p class="section-lead">This page loads the compiled ESM from this repo. Library lane keeps host-visible keys. Closed lane is <code>dist/*.closed.js</code>.</p>
+        <div class="samples" id="samples"></div>
+        <div class="toggles" id="toggles"></div>
+        
+        <div class="play-grid">
+          <textarea id="input" spellcheck="false" aria-label="Input"></textarea>
+          <div>
+            <div id="preview" class="preview" hidden></div>
+            <iframe id="frame" title="Rendered output" sandbox="allow-same-origin" hidden></iframe>
+            <pre id="output"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="shell">
+      <span>@itslil/remark-parse · MIT · LilScript reimplementation</span>
+      <a href="https://yeargun.github.io/remark-parselil/">yeargun.github.io/remark-parselil</a>
+    </footer>
+  </body>
+</html>

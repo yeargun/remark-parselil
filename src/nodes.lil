@@ -1,0 +1,112 @@
+import { jsNull } from "./host.lil";
+
+export JsValue mdRoot(JsValue children) {
+  return JS.object("type", "root", "children", children);
+}
+
+export JsValue mdParagraph(JsValue children) {
+  return JS.object("type", "paragraph", "children", children);
+}
+
+export JsValue mdHeading(int depth, JsValue children) {
+  return JS.object("type", "heading", "depth", depth, "children", children);
+}
+
+export JsValue mdThematic() {
+  return JS.object("type", "thematicBreak");
+}
+
+export JsValue mdQuote(JsValue children) {
+  return JS.object("type", "blockquote", "children", children);
+}
+
+export JsValue mdList(bool ordered, int start, bool spread, JsValue children) {
+  if (ordered) {
+    return JS.object("type", "list", "ordered", true, "start", start, "spread", spread, "children", children);
+  }
+  return JS.object("type", "list", "ordered", false, "spread", spread, "children", children);
+}
+
+export JsValue mdItem(bool spread, JsValue checked, JsValue children) {
+  return JS.object("type", "listItem", "spread", spread, "checked", checked, "children", children);
+}
+
+export JsValue mdCode(string lang, string meta, string value) {
+  JsValue langV = jsNull();
+  JsValue metaV = jsNull();
+  if (lang.length > 0) {
+    langV = lang;
+  }
+  if (meta.length > 0) {
+    metaV = meta;
+  }
+  return JS.object("type", "code", "lang", langV, "meta", metaV, "value", value);
+}
+
+export JsValue mdInlineCode(string value) {
+  return JS.object("type", "inlineCode", "value", value);
+}
+
+export JsValue mdHtml(string value) {
+  return JS.object("type", "html", "value", value);
+}
+
+export JsValue mdDef(string identifier, string label, string url, JsValue title) {
+  return JS.object("type", "definition", "identifier", identifier, "label", label, "url", url, "title", title);
+}
+
+export JsValue mdText(string value) {
+  return JS.object("type", "text", "value", value);
+}
+
+export JsValue mdEmphasis(JsValue children) {
+  return JS.object("type", "emphasis", "children", children);
+}
+
+export JsValue mdStrong(JsValue children) {
+  return JS.object("type", "strong", "children", children);
+}
+
+export JsValue mdDelete(JsValue children) {
+  return JS.object("type", "delete", "children", children);
+}
+
+export JsValue mdBreak() {
+  return JS.object("type", "break");
+}
+
+export JsValue mdLink(string url, JsValue title, JsValue children) {
+  return JS.object("type", "link", "url", url, "title", title, "children", children);
+}
+
+export JsValue mdImage(string url, JsValue title, string alt) {
+  return JS.object("type", "image", "url", url, "title", title, "alt", alt);
+}
+
+export JsValue mdLinkRef(string identifier, string label, string referenceType, JsValue children) {
+  return JS.object("type", "linkReference", "identifier", identifier, "label", label, "referenceType", referenceType, "children", children);
+}
+
+export JsValue mdImageRef(string identifier, string label, string referenceType, string alt) {
+  return JS.object("type", "imageReference", "identifier", identifier, "label", label, "referenceType", referenceType, "alt", alt);
+}
+
+export JsValue mdTable(JsValue align, JsValue children) {
+  return JS.object("type", "table", "align", align, "children", children);
+}
+
+export JsValue mdRow(JsValue children) {
+  return JS.object("type", "tableRow", "children", children);
+}
+
+export JsValue mdCell(JsValue children) {
+  return JS.object("type", "tableCell", "children", children);
+}
+
+export JsValue mdInlineMath(string value) {
+  return JS.object("type", "inlineMath", "value", value);
+}
+
+export JsValue mdMath(string value) {
+  return JS.object("type", "math", "value", value);
+}

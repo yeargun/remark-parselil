@@ -1,0 +1,885 @@
+import {
+  Flags,
+  isBlank,
+  isDigit,
+  joinLines,
+  jsNull,
+  leadSpaces,
+  normId,
+  pushNode,
+  skipSpaces,
+  unescapeText
+} from "./host.lil";
+import { parseInlines } from "./inline.lil";
+import {
+  mdCell,
+  mdCode,
+  mdDef,
+  mdHeading,
+  mdHtml,
+  mdItem,
+  mdList,
+  mdMath,
+  mdParagraph,
+  mdQuote,
+  mdRow,
+  mdTable,
+  mdThematic
+} from "./nodes.lil";
+
+export class BlockState {
+  string[] lines;
+  int index;
+  int count;
+  Flags flags;
+  Map<string, JsValue> defs;
+
+  init(string[] lines, Flags flags, Map<string, JsValue> defs) {
+    this.lines = lines;
+    this.index = 0;
+    this.count = lines.length;
+    this.flags = flags;
+    this.defs = defs;
+  }
+}
+
+bool atEnd(BlockState s) {
+  return s.index >= s.count;
+}
+
+string cur(BlockState s) {
+  if (atEnd(s)) {
+    return "";
+  }
+  return s.lines[s.index];
+}
+
+string peekLine(BlockState s, int offset) {
+  int i = s.index + offset;
+  if (i < 0 || i >= s.count) {
+    return "";
+  }
+  return s.lines[i];
+}
+
+void skipBlank(BlockState s) {
+  while (!atEnd(s) && isBlank(cur(s))) {
+    s.index = s.index + 1;
+  }
+}
+
+int fenceInfo(string line) {
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return 0;
+  }
+  string rest = skipSpaces(line, indent);
+  if (rest.length == 0) {
+    return 0;
+  }
+  int mark = rest.charCodeAt(0);
+  if (mark != 96 && mark != 126) {
+    return 0;
+  }
+  int n = 0;
+  int i = 0;
+  while (i < rest.length && rest.charCodeAt(i) == mark) {
+    n = n + 1;
+    i = i + 1;
+  }
+  if (n < 3) {
+    return 0;
+  }
+  if (mark == 96 && rest.slice(i).includes("`")) {
+    return 0;
+  }
+  return n;
+}
+
+bool isFenceLine(string line) {
+  return fenceInfo(line) > 0;
+}
+
+bool isAtx(string line) {
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return false;
+  }
+  string rest = skipSpaces(line, indent);
+  int n = 0;
+  while (n < rest.length && rest.charCodeAt(n) == 35) {
+    n = n + 1;
+  }
+  if (n == 0 || n > 6) {
+    return false;
+  }
+  if (n == rest.length) {
+    return true;
+  }
+  int next = rest.charCodeAt(n);
+  return next == 32 || next == 9;
+}
+
+bool isThematic(string line) {
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return false;
+  }
+  string rest = skipSpaces(line, indent).trim();
+  if (rest.length < 3) {
+    return false;
+  }
+  int mark = rest.charCodeAt(0);
+  if (mark != 42 && mark != 45 && mark != 95) {
+    return false;
+  }
+  int n = 0;
+  int i = 0;
+  while (i < rest.length) {
+    int c = rest.charCodeAt(i);
+    if (c == mark) {
+      n = n + 1;
+    } else if (c != 32 && c != 9) {
+      return false;
+    }
+    i = i + 1;
+  }
+  return n >= 3;
+}
+
+bool isSetext(string line) {
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return false;
+  }
+  string rest = skipSpaces(line, indent).trim();
+  if (rest.length == 0) {
+    return false;
+  }
+  int mark = rest.charCodeAt(0);
+  if (mark != 61 && mark != 45) {
+    return false;
+  }
+  int i = 0;
+  while (i < rest.length) {
+    if (rest.charCodeAt(i) != mark) {
+      return false;
+    }
+    i = i + 1;
+  }
+  return rest.length >= 1;
+}
+
+int setextDepth(string line) {
+  string rest = skipSpaces(line, leadSpaces(line)).trim();
+  if (rest.charCodeAt(0) == 61) {
+    return 1;
+  }
+  return 2;
+}
+
+bool isQuote(string line) {
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return false;
+  }
+  string rest = skipSpaces(line, indent);
+  return rest.length > 0 && rest.charCodeAt(0) == 62;
+}
+
+class ListMark {
+  bool ok;
+  bool ordered;
+  int start;
+  int indent;
+  int after;
+  string rest;
+  int marker;
+
+  init() {
+    this.ok = false;
+    this.ordered = false;
+    this.start = 1;
+    this.indent = 0;
+    this.after = 0;
+    this.rest = "";
+    this.marker = 0;
+  }
+}
+
+ListMark parseListMark(string line) {
+  ListMark m = new ListMark();
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return m;
+  }
+  string rest = skipSpaces(line, indent);
+  if (rest.length == 0) {
+    return m;
+  }
+  int c = rest.charCodeAt(0);
+  int used = 0;
+  if (c == 45 || c == 43 || c == 42) {
+    if (rest.length > 1) {
+      int n = rest.charCodeAt(1);
+      if (n != 32 && n != 9 && n != 0) {
+        return m;
+      }
+    }
+    m.ok = true;
+    m.ordered = false;
+    m.marker = c;
+    used = 1;
+  } else if (isDigit(c)) {
+    int i = 0;
+    int num = 0;
+    while (i < rest.length && isDigit(rest.charCodeAt(i)) && i < 9) {
+      num = num * 10 + (rest.charCodeAt(i) - 48);
+      i = i + 1;
+    }
+    if (i >= rest.length) {
+      return m;
+    }
+    int delim = rest.charCodeAt(i);
+    if (delim != 46 && delim != 41) {
+      return m;
+    }
+    if (i + 1 < rest.length) {
+      int n = rest.charCodeAt(i + 1);
+      if (n != 32 && n != 9) {
+        return m;
+      }
+    }
+    m.ok = true;
+    m.ordered = true;
+    m.start = num;
+    m.marker = delim;
+    used = i + 1;
+  } else {
+    return m;
+  }
+  string after = rest.slice(used);
+  int pad = 0;
+  int j = 0;
+  while (j < after.length && (after.charCodeAt(j) == 32 || after.charCodeAt(j) == 9) && pad < 4) {
+    pad = pad + 1;
+    j = j + 1;
+  }
+  if (pad == 0 && after.length > 0) {
+    return m;
+  }
+  if (pad == 0) {
+    pad = 1;
+  }
+  m.indent = indent + used + pad;
+  m.after = indent + used;
+  m.rest = after.slice(j);
+  if (pad >= 4 && after.trim().length > 0) {
+    m.indent = indent + used + 1;
+    m.rest = after.slice(1);
+  }
+  return m;
+}
+
+bool isListLine(string line) {
+  return parseListMark(line).ok;
+}
+
+bool isTableSep(string line) {
+  string t = line.trim();
+  if (!t.includes("-")) {
+    return false;
+  }
+  int i = 0;
+  bool saw = false;
+  if (t.length > 0 && t.charCodeAt(0) == 124) {
+    i = 1;
+  }
+  while (i < t.length) {
+    while (i < t.length && (t.charCodeAt(i) == 32 || t.charCodeAt(i) == 9)) {
+      i = i + 1;
+    }
+    if (i < t.length && t.charCodeAt(i) == 124) {
+      i = i + 1;
+      continue;
+    }
+    if (i >= t.length) {
+      break;
+    }
+    if (t.charCodeAt(i) == 58) {
+      i = i + 1;
+    }
+    int dashes = 0;
+    while (i < t.length && t.charCodeAt(i) == 45) {
+      dashes = dashes + 1;
+      i = i + 1;
+    }
+    if (dashes == 0) {
+      return false;
+    }
+    if (i < t.length && t.charCodeAt(i) == 58) {
+      i = i + 1;
+    }
+    saw = true;
+    while (i < t.length && (t.charCodeAt(i) == 32 || t.charCodeAt(i) == 9)) {
+      i = i + 1;
+    }
+    if (i < t.length && t.charCodeAt(i) == 124) {
+      i = i + 1;
+    } else if (i < t.length) {
+      return false;
+    }
+  }
+  return saw;
+}
+
+bool looksTableRow(string line) {
+  return line.includes("|");
+}
+
+bool isHtmlOpen(string line) {
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return false;
+  }
+  string rest = skipSpaces(line, indent);
+  if (rest.length < 2 || rest.charCodeAt(0) != 60) {
+    return false;
+  }
+  int c = rest.charCodeAt(1);
+  return c == 33 || c == 47 || c == 63 || (c >= 65 && c <= 90) || (c >= 97 && c <= 122);
+}
+
+bool isIndentedCode(string line) {
+  return leadSpaces(line) >= 4 && !isBlank(line);
+}
+
+bool isMathFence(string line) {
+  string t = line.trim();
+  return t == "$$" || (t.startsWith("$$") && t.endsWith("$$") && t.length >= 4);
+}
+
+class DefInfo {
+  bool ok;
+  string label;
+  string url;
+  JsValue title;
+
+  init() {
+    this.ok = false;
+    this.label = "";
+    this.url = "";
+    this.title = jsNull();
+  }
+}
+
+DefInfo parseDef(string line) {
+  DefInfo info = new DefInfo();
+  int indent = leadSpaces(line);
+  if (indent > 3) {
+    return info;
+  }
+  string rest = skipSpaces(line, indent);
+  if (rest.length < 4 || rest.charCodeAt(0) != 91) {
+    return info;
+  }
+  int close = rest.indexOf("]:");
+  if (close <= 1) {
+    return info;
+  }
+  string label = rest.slice(1, close);
+  string after = rest.slice(close + 2).trim();
+  if (after.length == 0) {
+    return info;
+  }
+  string url = "";
+  string leftover = "";
+  if (after.charCodeAt(0) == 60) {
+    int end = after.indexOf(">");
+    if (end < 0) {
+      return info;
+    }
+    url = after.slice(1, end);
+    leftover = after.slice(end + 1).trim();
+  } else {
+    int i = 0;
+    while (i < after.length && after.charCodeAt(i) != 32 && after.charCodeAt(i) != 9) {
+      i = i + 1;
+    }
+    url = after.slice(0, i);
+    leftover = after.slice(i).trim();
+  }
+  JsValue title = jsNull();
+  if (leftover.length >= 2) {
+    int q = leftover.charCodeAt(0);
+    int endq = leftover.charCodeAt(leftover.length - 1);
+    if ((q == 34 && endq == 34) || (q == 39 && endq == 39) || (q == 40 && endq == 41)) {
+      title = unescapeText(leftover.slice(1, leftover.length - 1));
+    } else {
+      return info;
+    }
+  } else if (leftover.length > 0) {
+    return info;
+  }
+  info.ok = true;
+  info.label = label;
+  info.url = unescapeText(url);
+  info.title = title;
+  return info;
+}
+
+JsValue inlinesOf(string src, BlockState s) {
+  return parseInlines(src, s.flags, s.defs);
+}
+
+JsValue parseFence(BlockState s) {
+  string open = cur(s);
+  int indent = leadSpaces(open);
+  int n = fenceInfo(open);
+  string rest = skipSpaces(open, indent);
+  int mark = rest.charCodeAt(0);
+  int i = n;
+  while (i < rest.length && (rest.charCodeAt(i) == 32 || rest.charCodeAt(i) == 9)) {
+    i = i + 1;
+  }
+  string info = rest.slice(i).trim();
+  string lang = "";
+  string meta = "";
+  if (info.length > 0) {
+    int sp = info.indexOf(" ");
+    int tab = info.indexOf("\t");
+    int cut = -1;
+    if (sp >= 0) {
+      cut = sp;
+    }
+    if (tab >= 0 && (cut < 0 || tab < cut)) {
+      cut = tab;
+    }
+    if (cut < 0) {
+      lang = info;
+    } else {
+      lang = info.slice(0, cut);
+      meta = info.slice(cut).trim();
+    }
+  }
+  s.index = s.index + 1;
+  string[] body = [];
+  while (!atEnd(s)) {
+    string line = cur(s);
+    int li = leadSpaces(line);
+    string stripped = skipSpaces(line, indent);
+    bool closing = false;
+    if (li <= 3) {
+      string r = skipSpaces(line, li);
+      if (r.length >= n && r.charCodeAt(0) == mark) {
+        int k = 0;
+        while (k < r.length && r.charCodeAt(k) == mark) {
+          k = k + 1;
+        }
+        if (k >= n && r.slice(k).trim().length == 0) {
+          closing = true;
+        }
+      }
+    }
+    if (closing) {
+      s.index = s.index + 1;
+      break;
+    }
+    body.push(stripped);
+    s.index = s.index + 1;
+  }
+  return mdCode(lang, meta, joinLines(body));
+}
+
+JsValue parseAtx(BlockState s) {
+  string line = cur(s);
+  string rest = skipSpaces(line, leadSpaces(line));
+  int depth = 0;
+  while (depth < rest.length && rest.charCodeAt(depth) == 35) {
+    depth = depth + 1;
+  }
+  string text = rest.slice(depth);
+  if (text.length > 0 && (text.charCodeAt(0) == 32 || text.charCodeAt(0) == 9)) {
+    text = text.slice(1);
+  }
+  text = text.trim();
+  int end = text.length;
+  while (end > 0 && text.charCodeAt(end - 1) == 35) {
+    end = end - 1;
+  }
+  if (end < text.length && end > 0 && (text.charCodeAt(end - 1) == 32 || text.charCodeAt(end - 1) == 9)) {
+    text = text.slice(0, end).trim();
+  } else if (end == 0) {
+    text = "";
+  }
+  s.index = s.index + 1;
+  return mdHeading(depth, inlinesOf(text, s));
+}
+
+JsValue parseQuote(BlockState s) {
+  string[] inner = [];
+  while (!atEnd(s)) {
+    string line = cur(s);
+    if (isBlank(line)) {
+      break;
+    }
+    if (isQuote(line)) {
+      string rest = skipSpaces(line, leadSpaces(line));
+      rest = rest.slice(1);
+      if (rest.length > 0 && (rest.charCodeAt(0) == 32 || rest.charCodeAt(0) == 9)) {
+        rest = rest.slice(1);
+      }
+      inner.push(rest);
+      s.index = s.index + 1;
+    } else if (inner.length > 0 && !isFenceLine(line) && !isAtx(line) && !isThematic(line) && !isListLine(line)) {
+      inner.push(line);
+      s.index = s.index + 1;
+    } else {
+      break;
+    }
+  }
+  BlockState child = new BlockState(inner, s.flags, s.defs);
+  return mdQuote(parseBlocks(child));
+}
+
+JsValue parseIndented(BlockState s) {
+  string[] body = [];
+  while (!atEnd(s)) {
+    string line = cur(s);
+    if (isIndentedCode(line)) {
+      body.push(skipSpaces(line, 4));
+      s.index = s.index + 1;
+    } else if (isBlank(line)) {
+      int look = s.index + 1;
+      bool more = false;
+      while (look < s.count) {
+        if (isIndentedCode(s.lines[look])) {
+          more = true;
+          break;
+        }
+        if (!isBlank(s.lines[look])) {
+          break;
+        }
+        look = look + 1;
+      }
+      if (!more) {
+        break;
+      }
+      body.push("");
+      s.index = s.index + 1;
+    } else {
+      break;
+    }
+  }
+  while (body.length > 0 && body[body.length - 1] == "") {
+    body.pop();
+  }
+  return mdCode("", "", joinLines(body));
+}
+
+JsValue parseHtmlBlock(BlockState s) {
+  string[] body = [];
+  body.push(cur(s));
+  s.index = s.index + 1;
+  while (!atEnd(s) && !isBlank(cur(s))) {
+    body.push(cur(s));
+    s.index = s.index + 1;
+  }
+  return mdHtml(joinLines(body));
+}
+
+JsValue parseMathBlock(BlockState s) {
+  string line = cur(s).trim();
+  s.index = s.index + 1;
+  if (line.startsWith("$$") && line.endsWith("$$") && line.length > 4) {
+    return mdMath(line.slice(2, line.length - 2).trim());
+  }
+  string[] body = [];
+  while (!atEnd(s)) {
+    string curLine = cur(s);
+    if (curLine.trim() == "$$") {
+      s.index = s.index + 1;
+      break;
+    }
+    body.push(curLine);
+    s.index = s.index + 1;
+  }
+  return mdMath(joinLines(body));
+}
+
+string[] splitTableCells(string line) {
+  string t = line.trim();
+  if (t.startsWith("|")) {
+    t = t.slice(1);
+  }
+  if (t.endsWith("|")) {
+    t = t.slice(0, t.length - 1);
+  }
+  string[] cells = [];
+  string curCell = "";
+  int i = 0;
+  while (i < t.length) {
+    int c = t.charCodeAt(i);
+    if (c == 92 && i + 1 < t.length) {
+      curCell = curCell + t.charAt(i + 1);
+      i = i + 2;
+    } else if (c == 124) {
+      cells.push(curCell.trim());
+      curCell = "";
+      i = i + 1;
+    } else {
+      curCell = curCell + t.charAt(i);
+      i = i + 1;
+    }
+  }
+  cells.push(curCell.trim());
+  return cells;
+}
+
+JsValue alignsFrom(string line) {
+  string[] cells = splitTableCells(line);
+  JsValue align = JS.array();
+  int i = 0;
+  while (i < cells.length) {
+    string cell = cells[i].trim();
+    bool left = cell.startsWith(":");
+    bool right = cell.endsWith(":");
+    if (left && right) {
+      pushNode(align, "center");
+    } else if (right) {
+      pushNode(align, "right");
+    } else if (left) {
+      pushNode(align, "left");
+    } else {
+      pushNode(align, jsNull());
+    }
+    i = i + 1;
+  }
+  return align;
+}
+
+JsValue parseTable(BlockState s) {
+  string header = cur(s);
+  s.index = s.index + 1;
+  string sep = cur(s);
+  s.index = s.index + 1;
+  JsValue align = alignsFrom(sep);
+  JsValue rows = JS.array();
+  string[] heads = splitTableCells(header);
+  JsValue headCells = JS.array();
+  int i = 0;
+  while (i < heads.length) {
+    pushNode(headCells, mdCell(inlinesOf(heads[i], s)));
+    i = i + 1;
+  }
+  pushNode(rows, mdRow(headCells));
+  while (!atEnd(s) && looksTableRow(cur(s)) && !isBlank(cur(s))) {
+    string[] cells = splitTableCells(cur(s));
+    JsValue row = JS.array();
+    int j = 0;
+    while (j < heads.length) {
+      string text = "";
+      if (j < cells.length) {
+        text = cells[j];
+      }
+      pushNode(row, mdCell(inlinesOf(text, s)));
+      j = j + 1;
+    }
+    pushNode(rows, mdRow(row));
+    s.index = s.index + 1;
+  }
+  return mdTable(align, rows);
+}
+
+bool itemIsTask(string text, BlockState s) {
+  if (!s.flags.gfm) {
+    return false;
+  }
+  string t = text.trim();
+  return t.startsWith("[ ]") || t.startsWith("[x]") || t.startsWith("[X]");
+}
+
+JsValue taskChecked(string text) {
+  string t = text.trim();
+  if (t.startsWith("[x]") || t.startsWith("[X]")) {
+    return true;
+  }
+  if (t.startsWith("[ ]")) {
+    return false;
+  }
+  return jsNull();
+}
+
+string stripTask(string text) {
+  string t = text.trim();
+  if (t.startsWith("[ ]") || t.startsWith("[x]") || t.startsWith("[X]")) {
+    if (t.length >= 4 && (t.charCodeAt(3) == 32 || t.charCodeAt(3) == 9)) {
+      return t.slice(4);
+    }
+    return t.slice(3);
+  }
+  return text;
+}
+
+JsValue parseList(BlockState s) {
+  ListMark first = parseListMark(cur(s));
+  JsValue items = JS.array();
+  bool spread = false;
+  while (!atEnd(s)) {
+    if (isBlank(cur(s))) {
+      int look = s.index + 1;
+      if (look >= s.count || !isListLine(s.lines[look])) {
+        break;
+      }
+      spread = true;
+      s.index = s.index + 1;
+      continue;
+    }
+    ListMark mark = parseListMark(cur(s));
+    if (!mark.ok) {
+      break;
+    }
+    if (mark.ordered != first.ordered) {
+      break;
+    }
+    string[] content = [];
+    content.push(mark.rest);
+    int itemIndent = mark.indent;
+    s.index = s.index + 1;
+    while (!atEnd(s)) {
+      string line = cur(s);
+      if (isBlank(line)) {
+        int look = s.index + 1;
+        if (look >= s.count) {
+          break;
+        }
+        string next = s.lines[look];
+        if (leadSpaces(next) >= itemIndent || isListLine(next)) {
+          content.push("");
+          s.index = s.index + 1;
+          spread = true;
+        } else {
+          break;
+        }
+      } else if (leadSpaces(line) >= itemIndent) {
+        content.push(skipSpaces(line, itemIndent));
+        s.index = s.index + 1;
+      } else if (isListLine(line) || isAtx(line) || isFenceLine(line) || isThematic(line) || isQuote(line)) {
+        break;
+      } else {
+        content.push(line);
+        s.index = s.index + 1;
+      }
+    }
+    string joined = joinLines(content);
+    JsValue checked = jsNull();
+    if (itemIsTask(content[0], s)) {
+      checked = taskChecked(content[0]);
+      content[0] = stripTask(content[0]);
+      joined = joinLines(content);
+    }
+    BlockState child = new BlockState(content, s.flags, s.defs);
+    JsValue kids = parseBlocks(child);
+    bool itemSpread = joined.includes("\n\n");
+    pushNode(items, mdItem(itemSpread, checked, kids));
+  }
+  return mdList(first.ordered, first.start, spread, items);
+}
+
+bool interruptsPara(string line, BlockState s) {
+  if (isBlank(line) || isAtx(line) || isFenceLine(line) || isThematic(line) || isQuote(line) || isListLine(line)) {
+    return true;
+  }
+  if (s.flags.allowDangerousHtml && isHtmlOpen(line)) {
+    return true;
+  }
+  if (s.flags.math && isMathFence(line)) {
+    return true;
+  }
+  return false;
+}
+
+JsValue parseParagraph(BlockState s) {
+  string[] lines = [];
+  lines.push(skipSpaces(cur(s), leadSpaces(cur(s))));
+  s.index = s.index + 1;
+  while (!atEnd(s)) {
+    string line = cur(s);
+    if (interruptsPara(line, s)) {
+      break;
+    }
+    if (lines.length == 1 && isSetext(line) && !isThematic(line)) {
+      int depth = setextDepth(line);
+      s.index = s.index + 1;
+      return mdHeading(depth, inlinesOf(joinLines(lines), s));
+    }
+    if (isSetext(line) && line.trim().charCodeAt(0) == 61) {
+      s.index = s.index + 1;
+      return mdHeading(1, inlinesOf(joinLines(lines), s));
+    }
+    lines.push(line);
+    s.index = s.index + 1;
+  }
+  return mdParagraph(inlinesOf(joinLines(lines), s));
+}
+
+JsValue parseBlocks(BlockState s) {
+  JsValue children = JS.array();
+  while (!atEnd(s)) {
+    skipBlank(s);
+    if (atEnd(s)) {
+      break;
+    }
+    string line = cur(s);
+    if (s.flags.math && isMathFence(line)) {
+      pushNode(children, parseMathBlock(s));
+    } else if (isFenceLine(line)) {
+      pushNode(children, parseFence(s));
+    } else if (isAtx(line)) {
+      pushNode(children, parseAtx(s));
+    } else if (isThematic(line)) {
+      pushNode(children, mdThematic());
+      s.index = s.index + 1;
+    } else if (isQuote(line)) {
+      pushNode(children, parseQuote(s));
+    } else if (isListLine(line)) {
+      pushNode(children, parseList(s));
+    } else if (s.flags.gfm && looksTableRow(line) && isTableSep(peekLine(s, 1))) {
+      pushNode(children, parseTable(s));
+    } else if (s.flags.allowDangerousHtml && isHtmlOpen(line)) {
+      pushNode(children, parseHtmlBlock(s));
+    } else if (isIndentedCode(line)) {
+      pushNode(children, parseIndented(s));
+    } else {
+      DefInfo def = parseDef(line);
+      if (def.ok) {
+        string id = normId(def.label);
+        s.defs.set(id, mdDef(id, def.label, def.url, def.title));
+        pushNode(children, mdDef(id, def.label, def.url, def.title));
+        s.index = s.index + 1;
+      } else {
+        pushNode(children, parseParagraph(s));
+      }
+    }
+  }
+  return children;
+}
+
+export void collectDefs(string[] lines, Map<string, JsValue> defs) {
+  int i = 0;
+  while (i < lines.length) {
+    DefInfo def = parseDef(lines[i]);
+    if (def.ok) {
+      string id = normId(def.label);
+      defs.set(id, mdDef(id, def.label, def.url, def.title));
+    }
+    i = i + 1;
+  }
+}
+
+export JsValue parseDocument(string[] lines, Flags flags) {
+  Map<string, JsValue> defs = new Map<string, JsValue>();
+  collectDefs(lines, defs);
+  BlockState s = new BlockState(lines, flags, defs);
+  return parseBlocks(s);
+}
