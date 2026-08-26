@@ -1,15 +1,11 @@
 export interface Options {
-  gfm?: boolean
-  breaks?: boolean
-  math?: boolean
-  allowDangerousHtml?: boolean
-  singleTilde?: boolean
+  [key: string]: unknown
 }
 
 export interface ProcessorLike {
-  parser?: (doc: unknown, file?: unknown) => unknown
+  parser?: (document: string) => unknown
   data?: (key?: string, value?: unknown) => unknown
 }
 
-export function remarkParse(this: ProcessorLike, options?: Options): void
+export function remarkParse(this: ProcessorLike, options?: Options | null): void
 export default remarkParse

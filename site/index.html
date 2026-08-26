@@ -30,7 +30,7 @@
         <div class="hero-copy">
           <p class="eyebrow"><span class="live-dot"></span> remark-parse@11.0.0 · LilScript port · @itslil/remark-parse</p>
           <h1>remark,<br /><em>parse</em></h1>
-          <p class="lede">This is not remark-parse. It is a LilScript plugin that installs a parser and reads <code>gfm</code> at parse time. 660 official cases become a <code>root</code>. Official rows are the published plugin plus micromark, then Terser and esbuild.</p>
+          <p class="lede">Official <code>remark-parse@11.0.0</code> algorithms rewritten in LilScript — a unified parser plugin over micromark/mdast. Official suite 3 plus package tests (12/12). Not affiliated with upstream. Official rows are the published plugin plus micromark, then Terser and esbuild.</p>
           <div class="install-row">
             <code>npm install @itslil/remark-parse</code>
             <button class="copy" data-copy="npm install @itslil/remark-parse" type="button">copy</button>
@@ -50,7 +50,7 @@
             <div><strong id="hero-shipped">—</strong><span>Brotli-11 you ship, vs Terser</span></div>
             <div><strong id="hero-gzip">—</strong><span>gzip-9 vs Terser</span></div>
             <div><strong id="hero-raw">—</strong><span>raw vs Terser</span></div>
-            <div><strong id="hero-spec">—</strong><span>corpus roots</span></div>
+            <div><strong id="hero-spec">—</strong><span>official + package tests</span></div>
           </div>
           <p class="score-note">
             Official rows are one esbuild bundle of <code>remark-parse@11.0.0</code> plus the packages it needs at runtime, then Terser or esbuild.
@@ -59,7 +59,7 @@
         </div>
       </section>
       <section class="ticker" aria-label="Supported features">
-        <div>parser <span>✦</span> gfm at parse time <span>✦</span> breaks newlines <span>✦</span> 660 corpus <span>✦</span> tree-shake</div>
+        <div>parser <span>✦</span> micromark <span>✦</span> mdast <span>✦</span> extensions <span>✦</span> tree-shake</div>
       </section>
       <section class="performance shell" id="performance">
         <div class="section-heading">
@@ -69,7 +69,7 @@
           </div>
           <p>
             Not Playwright — Node v22.21.1 on this machine, quiet median after warmup.
-            Race 10× in the playground for a browser number. The 660-case corpus is checksummed before any size row is a claim.
+            Race 10× in the playground for a browser number. The official test suite (12/12) is green before any size row is a claim.
           </p>
         </div>
         <div class="perf-cards" id="perf-cards"></div>
@@ -196,7 +196,7 @@
     </main>
     <footer class="shell">
       <span>@itslil/remark-parse · MIT</span>
-      <span>remark-parse@11.0.0, rewritten in LilScript — not the full official package</span>
+      <span>official remark-parse@11.0.0 algorithms rewritten in LilScript — official test suite 12/12 — not affiliated with upstream</span>
       <a href="https://github.com/yeargun/remark-parselil">source ↗</a>
     </footer>
   </body>

@@ -1,91 +1,27 @@
-import { Lexer, Token } from "./types.lil";
-import { lex } from "./lexer.lil";
-import { optionFlag } from "./parse.lil";
-import { tokensToMdast } from "./to-mdast.lil";
+import { fromMarkdownImpl as fromMarkdown } from "./from-markdown.lil";
+import { call1, objectAssign, undef } from "./micromark/host.lil";
 
-export extern class ParseOptions {
-  JsValue gfm;
-  JsValue breaks;
-  JsValue math;
-  JsValue allowDangerousHtml;
-  JsValue singleTilde;
-  JsValue pedantic;
-  JsValue silent;
+JsValue readData(JsValue self, string key) {
+  return call1(JS.get(self, "data"), self, key);
 }
 
-export extern class ParseHost {
-  JsValue parser;
-  JsValue data;
-}
-
-bool flagOf(JsValue value, bool fallback) {
-  if (JS.isUndefined(value) || JS.isNullish(value)) {
-    return fallback;
+JsValue orEmptyList(JsValue value) {
+  if (value.truthy()) {
+    return value;
   }
-  return value.truthy();
+  return JS.array();
 }
 
-JsValue readSettings(JsValue self) {
-  ParseHost host = JS.assume(self);
-  JsValue dataFn = host.data;
-  if (JS.typeOf(dataFn) == "function") {
-    JsValue bag = JS.call(dataFn, self);
-    if (!JS.isUndefined(bag) && !JS.isNullish(bag)) {
-      return bag["settings"];
-    }
-  }
-  return JS.undefined();
+JsValue remarkParseCall(JsValue self, JsValue options) {
+  JS.set(self, "parser", JS.method1((JsValue _parserThis, JsValue document) => {
+    JsValue merged = objectAssign(JS.object(), readData(self, "settings"));
+    objectAssign(merged, options);
+    JS.set(merged, "extensions", orEmptyList(readData(self, "micromarkExtensions")));
+    JS.set(merged, "mdastExtensions", orEmptyList(readData(self, "fromMarkdownExtensions")));
+    return fromMarkdown(document, merged, undef());
+  }));
+  return undef();
 }
 
-ParseOptions mergeOptions(JsValue options, JsValue settings) {
-  ParseOptions next = JS.assume(JS.object());
-  ParseOptions direct = JS.assume(JS.object());
-  ParseOptions fromData = JS.assume(JS.object());
-  if (!JS.isUndefined(options) && !JS.isNullish(options)) {
-    direct = JS.assume(options);
-  }
-  if (!JS.isUndefined(settings) && !JS.isNullish(settings)) {
-    fromData = JS.assume(settings);
-  }
-  next.gfm = flagOf(direct.gfm, flagOf(fromData.gfm, false));
-  next.breaks = flagOf(direct.breaks, flagOf(fromData.breaks, false));
-  next.math = flagOf(direct.math, flagOf(fromData.math, false));
-  next.allowDangerousHtml = flagOf(direct.allowDangerousHtml, flagOf(fromData.allowDangerousHtml, false));
-  next.singleTilde = flagOf(direct.singleTilde, flagOf(fromData.singleTilde, false));
-  next.pedantic = flagOf(direct.pedantic, flagOf(fromData.pedantic, false));
-  next.silent = flagOf(direct.silent, flagOf(fromData.silent, false));
-  return next;
-}
-
-string docText(JsValue doc, JsValue file) {
-  if (doc is string) {
-    return doc;
-  }
-  JsValue dv = JS.get(doc, "value");
-  if (dv is string) {
-    return dv;
-  }
-  JsValue fv = JS.get(file, "value");
-  if (fv is string) {
-    return fv;
-  }
-  return "";
-}
-
-JsValue parseDoc(string src, ParseOptions opt) {
-  Lexer lx = new Lexer(optionFlag(opt.gfm, false), optionFlag(opt.breaks, false), optionFlag(opt.pedantic, false), optionFlag(opt.silent, false));
-  Token[] tokens = lex(lx, src);
-  return tokensToMdast(tokens, optionFlag(opt.allowDangerousHtml, false));
-}
-
-JsValue install(JsValue self, JsValue options) {
-  ParseHost host = JS.assume(self);
-  host.parser = JS.method2((JsValue _s, JsValue doc, JsValue file) => {
-    ParseOptions flags = mergeOptions(options, readSettings(self));
-    return parseDoc(docText(doc, file), flags);
-  });
-  return JS.undefined();
-}
-
-export JsValue remarkParse = JS.method1(install);
+export JsValue remarkParse = JS.method1(remarkParseCall);
 export JsValue default = remarkParse;

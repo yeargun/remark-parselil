@@ -1,6 +1,6 @@
 {
   "name": "@itslil/remark-parse",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "remark-parse reimplemented in LilScript",
   "keywords": [
     "remark",
@@ -56,12 +56,16 @@
   "scripts": {
     "build": "node scripts/build.mjs --compile",
     "build:site": "node scripts/build-site.mjs",
-    "test": "node --test test/*.test.mjs",
+    "test": "node --test test/*.test.mjs test/official/index.js",
     "check:site": "npm run build:site && node --test test/site.test.mjs",
     "check:pack": "node scripts/check-pack.mjs",
     "prepublishOnly": "npm test && npm run check:pack && npm run check:site"
   },
   "devDependencies": {
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "mdast-util-gfm": "^3.0.0",
+    "micromark-extension-gfm": "^3.0.0",
+    "unified": "^11.0.0",
+    "unist-util-remove-position": "^5.0.0"
   }
 }
