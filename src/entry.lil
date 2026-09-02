@@ -23,5 +23,5 @@ JsValue remarkParseCall(JsValue self, JsValue options) {
   return undef();
 }
 
-export JsValue remarkParse = JS.method1(remarkParseCall);
+JsValue remarkParse = JS.method1(remarkParseCall);
 export JsValue default = remarkParse;

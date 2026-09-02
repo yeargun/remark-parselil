@@ -96,7 +96,7 @@ await esbuild({
   format: "iife",
   globalName: "remarkParse",
   footer: {
-    js: `globalThis.remarkParse=remarkParse.default||remarkParse.remarkParse||remarkParse;`,
+    js: `globalThis.remarkParse=remarkParse.default||remarkParse;`,
   },
   legalComments: "none",
   minifyWhitespace: true,

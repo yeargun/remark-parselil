@@ -3,19 +3,20 @@ import { readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, it } from "node:test"
-import remarkParse, { remarkParse as named } from "../dist/remark-parse.esm.js"
+import remarkParse from "../dist/remark-parse.esm.js"
+import * as upstreamRemarkParse from "remark-parse"
 import { unified } from "unified"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 
 describe("remark-parse", () => {
-  it("exports the plugin as default and named", () => {
+  it("exports only the upstream default", async () => {
     assert.equal(typeof remarkParse, "function")
-    assert.equal(named, remarkParse)
+    assert.deepEqual(Object.keys(await import("../dist/remark-parse.esm.js")), Object.keys(upstreamRemarkParse))
   })
 
   it("installs a parser that turns a heading into mdast", () => {
-    const tree = unified().use(named).parse("# hi")
+    const tree = unified().use(remarkParse).parse("# hi")
     assert.equal(tree.type, "root")
     assert.equal(tree.children[0].type, "heading")
     assert.equal(tree.children[0].depth, 1)
@@ -23,7 +24,7 @@ describe("remark-parse", () => {
   })
 
   it("parses paragraphs, emphasis, strong, code, and lists", () => {
-    const tree = unified().use(named).parse("Hello **bold** and *em* and `code`.\n\n- one\n- two\n")
+    const tree = unified().use(remarkParse).parse("Hello **bold** and *em* and `code`.\n\n- one\n- two\n")
     const types = tree.children.map((node) => node.type)
     assert.ok(types.includes("paragraph"))
     assert.ok(types.includes("list"))
@@ -35,11 +36,39 @@ describe("remark-parse", () => {
   })
 
   it("reads data keys at parse time", () => {
-    const proc = unified().use(named)
+    const proc = unified().use(remarkParse)
     proc.data("settings", {})
     const tree = proc.parse("Alfred")
     assert.equal(tree.type, "root")
     assert.equal(tree.children[0].type, "paragraph")
+  })
+
+  it("matches upstream property insertion order", () => {
+    const tree = unified().use(remarkParse).parse("# heading\n\n[link](url)\n\n- item")
+
+    assert.deepEqual(Object.keys(tree.children[0]), ["type", "depth", "children", "position"])
+    assert.deepEqual(Object.keys(tree.children[1].children[0]), [
+      "type",
+      "title",
+      "url",
+      "children",
+      "position",
+    ])
+    assert.deepEqual(Object.keys(tree.children[2]), [
+      "type",
+      "ordered",
+      "start",
+      "spread",
+      "children",
+      "position",
+    ])
+    assert.deepEqual(Object.keys(tree.children[2].children[0]), [
+      "type",
+      "spread",
+      "checked",
+      "children",
+      "position",
+    ])
   })
 
   it("keeps host-visible plugin keys in the library artifact", () => {

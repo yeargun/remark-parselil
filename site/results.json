@@ -2,7 +2,7 @@
   "pin": "remark-parse@11.0.0",
   "package": "@itslil/remark-parse",
   "file": "remark-parse",
-  "lilExport": "remarkParse",
+  "lilExport": "default",
   "officialExport": "default",
   "node": "v22.21.1",
   "codec": "lilscript-codec gzip-9 / brotli-11",
@@ -10,9 +10,9 @@
   "warmupDiscard": 3,
   "comparison": "Official rows are an esbuild bundle of remark-parse@11.0.0 plus its runtime graph, then Terser or esbuild. LilScript is the compiled npm file. Closed is extern_fields=false.",
   "spec": {
-    "total": 12,
-    "pass": 12,
-    "label": "official + package tests"
+    "total": 3,
+    "pass": 3,
+    "label": "official remark-parse subtests"
   },
   "play": {
     "kind": "plugin-parse",
@@ -56,18 +56,18 @@
     {
       "id": "itslil",
       "name": "@itslil/remark-parse · library",
-      "raw": 94859,
-      "gzip9": 31774,
-      "brotli11": 27095,
+      "raw": 89641,
+      "gzip9": 31330,
+      "brotli11": 26205,
       "note": "LilScript js-module, extern_fields true. The npm ESM.",
       "primary": true
     },
     {
       "id": "itslil-closed",
       "name": "@itslil/remark-parse · closed",
-      "raw": 95680,
-      "gzip9": 32213,
-      "brotli11": 27405,
+      "raw": 89554,
+      "gzip9": 31249,
+      "brotli11": 26127,
       "note": "Same source, extern_fields false"
     }
   ],

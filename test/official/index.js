@@ -8,9 +8,8 @@ import {removePosition} from 'unist-util-remove-position'
 
 test('remark-parse', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('../../dist/remark-parse.esm.js')).sort(), [
-      'default',
-      'remarkParse'
+    assert.deepEqual(Object.keys(await import('../../dist/remark-parse.esm.js')), [
+      'default'
     ])
   })
 

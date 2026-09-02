@@ -1,6 +1,6 @@
 {
   "name": "@itslil/remark-parse",
-  "version": "11.0.1",
+  "version": "11.0.2",
   "description": "remark-parse reimplemented in LilScript",
   "keywords": [
     "remark",
@@ -34,7 +34,11 @@
       "require": "./dist/remark-parse.cjs",
       "default": "./dist/remark-parse.esm.js"
     },
-    "./closed": "./dist/remark-parse.closed.js",
+    "./closed": {
+      "types": "./dist/remark-parse.d.ts",
+      "import": "./dist/remark-parse.closed.js",
+      "default": "./dist/remark-parse.closed.js"
+    },
     "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
@@ -47,7 +51,8 @@
     "dist/remark-parse.d.ts",
     "LICENSE",
     "NOTICE.md",
-    "README.md"
+    "README.md",
+    "UPSTREAM.md"
   ],
   "sideEffects": false,
   "engines": {
@@ -56,16 +61,23 @@
   "scripts": {
     "build": "node scripts/build.mjs --compile",
     "build:site": "node scripts/build-site.mjs",
-    "test": "node --test test/*.test.mjs test/official/index.js",
+    "test": "npm run check:types && node --test test/*.test.mjs test/official/index.js",
+    "check:types": "tsc --project tsconfig.json",
     "check:site": "npm run build:site && node --test test/site.test.mjs",
     "check:pack": "node scripts/check-pack.mjs",
     "prepublishOnly": "npm test && npm run check:pack && npm run check:site"
+  },
+  "dependencies": {
+    "@itslil/mdast-util-from-markdown": "^2.0.3",
+    "@types/mdast": "^4.0.0",
+    "micromark-util-types": "^2.0.0",
+    "unified": "^11.0.0"
   },
   "devDependencies": {
     "esbuild": "0.28.1",
     "mdast-util-gfm": "^3.0.0",
     "micromark-extension-gfm": "^3.0.0",
-    "unified": "^11.0.0",
+    "typescript": "^5.0.0",
     "unist-util-remove-position": "^5.0.0"
   }
 }

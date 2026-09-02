@@ -1,6 +1,6 @@
 # @itslil/remark-parse
 
-Official [`remark-parse@11.0.0`](https://github.com/remarkjs/remark) algorithms rewritten in LilScript. Official suite 3 plus package tests (12/12). Not affiliated with upstream.
+Official [`remark-parse@11.0.0`](https://github.com/remarkjs/remark) algorithms rewritten in LilScript. Official remark-parse subtests 3/3. Not affiliated with upstream.
 
 **Site:** [yeargun.github.io/remark-parselil/](https://yeargun.github.io/remark-parselil/)
 
