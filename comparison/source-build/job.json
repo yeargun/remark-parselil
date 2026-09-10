@@ -1,0 +1,33 @@
+{
+  "source": {
+    "repository": "https://github.com/remarkjs/remark.git",
+    "commit": "de740c7d52c0278bbc36d8eac218ab74995c6420",
+    "package": "remark-parse",
+    "version": "11.0.0",
+    "directory": "packages/remark-parse"
+  },
+  "portSource": {
+    "commit": "e85337286c51d44ce2bd85a645de1734befe1ced"
+  },
+  "compilerCommit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
+  "install": [
+    "npm",
+    "install",
+    "--ignore-scripts",
+    "--no-audit",
+    "--no-fund"
+  ],
+  "setup": [],
+  "build": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "clean": [],
+  "entry": "packages/remark-parse/index.js",
+  "defaultExport": true,
+  "external": [],
+  "esmScope": "remark-parse@11.0.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline",
+  "lilscriptBuild": "node scripts/build.mjs --compile --force",
+  "test": "npm run check:types && node --test test/*.test.mjs test/official/index.js"
+}
