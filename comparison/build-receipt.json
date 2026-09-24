@@ -1,42 +1,38 @@
 {
   "schemaVersion": 1,
   "name": "remark-parselil",
-  "measuredAt": "2026-09-10T14:00:02Z",
-  "status": "blocked",
+  "measuredAt": "2026-09-24T04:37:46Z",
+  "status": "published",
   "buildPassed": true,
-  "summary": "The newly measured artifact remains diagnostic until its behavior gate is satisfied; the previously published runtime is retained.",
-  "sourceCommit": "e85337286c51d44ce2bd85a645de1734befe1ced",
-  "previousPublicCommit": "986f3242941155ce865b036d03ba2dc9381416bc",
+  "summary": "Rebuilt by the one LilScript compiler; every delivered file is compiler-written (a license banner and module wrappers are the only bytes the build adds).",
+  "sourceCommit": "48cdf58 plus the release working tree (committed together with these records)",
+  "previousPublicCommit": "4f37d3619fbaf9116e609131592bcfa781d8efbd",
   "compiler": {
-    "commit": "63c2896a71e60cbcca7870fe979f9d6ecaff3452",
-    "sha256": "2319462ef7d858c8e2a5a767260aa4f80d325e0045afa0cc86cc122d1299b059",
+    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
+    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9",
     "profile": "release",
     "dirty": false
   },
   "machine": {
-    "cpu": "AMD EPYC 9V45 96-Core Processor",
-    "logicalCpus": 16,
-    "affinityCpus": 16,
-    "memoryBytes": 33648431104,
-    "os": "Ubuntu 24.04.4 LTS",
-    "kernel": "6.17.0-1022-azure",
-    "architecture": "x86_64",
-    "node": "v22.23.2",
-    "rayonThreads": 16,
     "provider": "Azure",
-    "instanceClass": "Standard_D16als_v7",
-    "parallelPortBuildsOnMachine": 1,
+    "instanceClass": "Standard_B8als_v2",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "logicalCpus": 8,
+    "memoryBytes": 16706420736,
+    "os": "Ubuntu 24.04.3 LTS",
+    "kernel": "7.0.0-1014-azure",
+    "node": "v24.11.1",
+    "rayonThreads": 8,
     "loadAtStart": [
-      5.92626953125,
-      5.0888671875,
-      2.56103515625
+      3.39306640625,
+      3.0986328125,
+      3.01220703125
     ],
     "loadAtEnd": [
-      3.01953125,
-      4.296875,
-      2.69873046875
-    ],
-    "concurrencyNote": "The audit scheduled one port per worker, but this is a shared pool. Outside compiler jobs were observed during the run; timings are contextual wall times, not controlled speedup benchmarks."
+      7.9921875,
+      4.32373046875,
+      3.43017578125
+    ]
   },
   "upstream": {
     "name": "remark-parselil",
@@ -47,24 +43,15 @@
   },
   "comparisonScope": "remark-parse@11.0.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline Sizes use canonical zlib 1.3.1 gzip-9 and Google Brotli 1.1.0 quality 11.",
   "sizes": {
-    "previous": {
-      "id": "itslil",
-      "name": "@itslil/remark-parse \u00b7 library",
-      "raw": 89641,
-      "gzip9": 31330,
-      "brotli11": 26205,
-      "note": "LilScript js-module, extern_fields true. The npm ESM.",
-      "primary": true
-    },
     "current": {
       "path": "dist/remark-parse.esm.js",
-      "raw": 87764,
-      "gzip9": 30092,
-      "brotli11": 25498,
-      "sha256": "1e3671461653a125e12de32208eb5dacbde1710df65bea5b229d54286c774a8e"
+      "raw": 71995,
+      "gzip9": 26508,
+      "brotli11": 22386,
+      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
     },
     "upstream": {
-      "path": ".page-audit/upstream/official.esm.js",
+      "path": "original.esm.js",
       "raw": 55705,
       "gzip9": 15052,
       "brotli11": 13399,
@@ -73,28 +60,28 @@
   },
   "officialArtifacts": [
     {
-      "path": ".page-audit/upstream/official.terser-nomangle.js",
-      "raw": 90304,
-      "gzip9": 18478,
-      "brotli11": 16462,
-      "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
-    },
-    {
-      "path": ".page-audit/upstream/official.esm.js",
+      "path": "original.esm.js",
       "raw": 55705,
       "gzip9": 15052,
       "brotli11": 13399,
       "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
     },
     {
-      "path": ".page-audit/upstream/official.unminified.js",
-      "raw": 138615,
-      "gzip9": 24696,
-      "brotli11": 21043,
-      "sha256": "41ec8add58514fc919775f389acb1a7b734412247a70d1a21a65236177199b67"
+      "path": "original.unminified.js",
+      "raw": 138611,
+      "gzip9": 24703,
+      "brotli11": 21040,
+      "sha256": "76cdacf19b72fc7add9b9293a815e0855d963aa129179eb11a1b88620604646f"
     },
     {
-      "path": ".page-audit/upstream/official.esbuild.js",
+      "path": "original.terser-nomangle.js",
+      "raw": 90304,
+      "gzip9": 18478,
+      "brotli11": 16462,
+      "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
+    },
+    {
+      "path": "original.esbuild.js",
       "raw": 57083,
       "gzip9": 16140,
       "brotli11": 14395,
@@ -103,146 +90,78 @@
   ],
   "candidateArtifacts": [
     {
-      "path": "dist/remark-parse.cjs",
-      "raw": 102364,
-      "gzip9": 32146,
-      "brotli11": 27162,
-      "sha256": "340c5c642673c9c98edbb8067fa2c31978de64c148764a0303166bf17ad73eb9"
+      "path": "dist/remark-parse.umd.js",
+      "raw": 72028,
+      "gzip9": 26527,
+      "brotli11": 22402,
+      "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
     },
     {
-      "path": "dist/remark-parse.umd.js",
-      "raw": 102440,
-      "gzip9": 32204,
-      "brotli11": 27202,
-      "sha256": "29c4184a9bea3fcabc1eb9c9b2fdfc6e6ab6fc07799df963ef6de052026d3060"
+      "path": "dist/remark-parse.cjs",
+      "raw": 72060,
+      "gzip9": 26544,
+      "brotli11": 22437,
+      "sha256": "88bc42b8b92600520ba46cf55a432434833eb5664b2ed3cd8ffd8d45e90a8ba7"
     },
     {
       "path": "dist/remark-parse.closed.js",
-      "raw": 89034,
-      "gzip9": 30533,
-      "brotli11": 25919,
-      "sha256": "1a207b27ac6a94ee18277501e72217f53e91b37d28ece4059e362f2e9f27cb22"
-    },
-    {
-      "path": "dist/remark-parse.esm.js",
-      "raw": 87764,
-      "gzip9": 30092,
-      "brotli11": 25498,
-      "sha256": "1e3671461653a125e12de32208eb5dacbde1710df65bea5b229d54286c774a8e"
+      "raw": 74248,
+      "gzip9": 26594,
+      "brotli11": 22430,
+      "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
     },
     {
       "path": "dist/remark-parse.raw.js",
-      "raw": 87677,
-      "gzip9": 30024,
-      "brotli11": 25437,
-      "sha256": "fbca736571790c4453f773cebe2ca8178693e3969933a9657113147db3f3c2d6"
-    },
-    {
-      "path": ".page-audit/upstream/official.esbuild.js",
-      "raw": 57083,
-      "gzip9": 16140,
-      "brotli11": 14395,
-      "sha256": "82adcd6011ee4dfba469ddceed357e8c892b8a4cdd712d86b8dfa6389ca39932"
-    },
-    {
-      "path": ".page-audit/upstream/official.terser-nomangle.js",
-      "raw": 90304,
-      "gzip9": 18478,
-      "brotli11": 16462,
-      "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
-    },
-    {
-      "path": ".page-audit/upstream/official.unminified.js",
-      "raw": 138615,
-      "gzip9": 24696,
-      "brotli11": 21043,
-      "sha256": "41ec8add58514fc919775f389acb1a7b734412247a70d1a21a65236177199b67"
-    },
-    {
-      "path": ".page-audit/upstream/official.esm.js",
-      "raw": 55705,
-      "gzip9": 15052,
-      "brotli11": 13399,
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
-    }
-  ],
-  "timing": {
-    "primaryCompilerSeconds": 108.6206545829773,
-    "primaryScope": "One real compiler process, including code generation and codec-guided search; excludes subsequent package wrapping.",
-    "packageSeconds": 164.08217604800006,
-    "packageScope": "node scripts/build.mjs --compile --force; 2 successful compiler invocations plus package generation.",
-    "upstreamSeconds": 0.30910268700000004,
-    "upstreamScope": "remark-parse@11.0.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline",
-    "protocol": "Same shared worker for both lanes; one fresh LilScript package build; median of three sequential upstream ESM builds (PlayCanvas records one native reference build). Outside compiler jobs were observed in the pool, so contention is not excluded. Dependencies, tests and compression measurement are outside these build times.",
-    "upstreamSamples": [
-      {
-        "bundleSeconds": 0.012351210999999999,
-        "wallSeconds": 0.47861914499999997
-      },
-      {
-        "bundleSeconds": 0.010796055000000023,
-        "wallSeconds": 0.30910268700000004
-      },
-      {
-        "bundleSeconds": 0.011952054999999974,
-        "wallSeconds": 0.2618210990000001
-      }
-    ]
-  },
-  "behavior": {
-    "command": "npm run check:types && node --test test/*.test.mjs test/official/index.js",
-    "summary": "Repository test command failed (exit 1). # tests 16 \u00b7 # pass 14 \u00b7 # fail 2",
-    "before": {
-      "exitCode": 0,
-      "failures": [],
-      "logSha256": "ef30b720e67bd655b281db837f8e8be8d19982eb06b2e0357905c969f4297ae2"
-    },
-    "after": {
-      "exitCode": 1,
-      "tail": "   {\n        +                   type: 'text',\n        +                   value: '[x] '\n        +                 },\n        +                 {\n                            children: [\n                              {\n                                type: 'text',\n                                value: 'contact@example.com'\n                              }\n        ...\n                            type: 'text',\n        +                   value: ' ~~strikethrough~~'\n        -                   value: ' '\n                          },\n        -                 {\n        -                   children: [\n        -                     {\n        -                       type: 'text',\n        -                       value: 'strikethrough'\n        -                     }\n        -                   ],\n        -                   type: 'delete'\n        -                 }\n                        ],\n                        type: 'paragraph'\n                      }\n                    ],\n                    spread: false,\n        \n      code: 'ERR_ASSERTION'\n      name: 'AssertionError'\n      expected:\n        type: 'root'\n        children:\n          0:\n            type: 'list'\n            ordered: false\n            start: ~\n            spread: false\n            children:\n              0:\n                type: 'listItem'\n                spread: false\n                checked: true\n                children:\n                  0:\n                    type: 'paragraph'\n                    children:\n                      0:\n                        type: 'link'\n                        title: ~\n                        url: 'mailto:contact@example.com'\n                        children:\n                          0:\n                            type: 'text'\n                            value: 'contact@example.com'\n                      1:\n                        type: 'text'\n                        value: ' '\n                      2:\n                        type: 'delete'\n                        children:\n                          0:\n                            type: 'text'\n                            value: 'strikethrough'\n      actual:\n        type: 'root'\n        children:\n          0:\n            type: 'list'\n            ordered: false\n            start: ~\n            spread: false\n            children:\n              0:\n                type: 'listItem'\n                spread: false\n                checked: ~\n                children:\n                  0:\n                    type: 'paragraph'\n                    children:\n                      0:\n                        type: 'text'\n                        value: '[x] '\n                      1:\n                        type: 'link'\n                        title: ~\n                        url: 'mailto:contact@example.com'\n                        children:\n                          0:\n                            type: 'text'\n                            value: 'contact@example.com'\n                      2:\n                        type: 'text'\n                        value: ' ~~strikethrough~~'\n      operator: 'deepStrictEqual'\n      stack: |-\n        TestContext.<anonymous> (file://<snapshot>/test/official/index.js:54:12)\n        Test.runInAsyncScope (node:async_hooks:214:14)\n        Test.run (node:internal/test_runner/test:1047:25)\n        Test.start (node:internal/test_runner/test:944:17)\n        TestContext.test (node:internal/test_runner/test:373:20)\n        TestContext.<anonymous> (file://<snapshot>/test/official/index.js:45:11)\n        async Test.run (node:internal/test_runner/test:1054:7)\n        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)\n      ...\n    1..3\nnot ok 3 - remark-parse\n  ---\n  duration_ms: 7.643956\n  type: 'test'\n  location: '<snapshot>/test/official/index.js:9:1'\n  failureType: 'subtestsFailed'\n  error: '1 subtest failed'\n  code: 'ERR_TEST_FAILURE'\n  ...\n# Subtest: package artifacts\n    # Subtest: loads the ESM and CommonJS exports\n    ok 1 - loads the ESM and CommonJS exports\n      ---\n      duration_ms: 6.208891\n      type: 'test'\n      ...\n    # Subtest: loads the closed export\n    ok 2 - loads the closed export\n      ---\n      duration_ms: 4.660657\n      type: 'test'\n      ...\n    # Subtest: exposes a callable UMD global\n    ok 3 - exposes a callable UMD global\n      ---\n      duration_ms: 5.388374\n      type: 'test'\n      ...\n    1..3\nok 4 - package artifacts\n  ---\n  duration_ms: 16.860663\n  type: 'suite'\n  ...\n# Subtest: site\n    # Subtest: has a markedlil-style lab with receipts\n    ok 1 - has a markedlil-style lab with receipts\n      ---\n      duration_ms: 0.77574\n      type: 'test'\n      ...\n    1..1\nok 5 - site\n  ---\n  duration_ms: 1.524188\n  type: 'suite'\n  ...\n1..5\n# tests 16\n# suites 4\n# pass 14\n# fail 2\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 83.493617\n",
-      "failures": [
-        "remark-parse",
-        "should support extensions"
-      ],
-      "logSha256": "d88c50d10f16276acced71e525fcf372ed521bc19396e3337f93e803d4ab2477"
-    }
-  },
-  "findings": [
-    "1 committed port changes were absent from GitHub at the start of the audit.",
-    "Published-to-fresh Brotli drift: -707 bytes (-2.70%). This includes port source/config changes and compiler changes.",
-    "The root checkout compiler (54e1948) rejects config field wide_single_use_collapse; today's migration/target-tree compiler is required.",
-    "Added the pinned official reference package as an explicit devDependency; tests imported it but npm ci did not install it.",
-    "Repository test command failed (exit 1). # tests 16 \u00b7 # pass 14 \u00b7 # fail 2"
-  ],
-  "primaryArtifact": "dist/remark-parse.esm.js",
-  "beforePage": {
-    "url": "https://yeargun.github.io/remark-parselil/",
-    "status": 200,
-    "sha256": "ce08d0f87ac8cdb851967430f4f67a74dd7270868a9e6615f44be26c01a47f26",
-    "lastModified": "Wed, 02 Sep 2026 15:25:39 GMT"
-  },
-  "codecSha256": "9257fd055728895c11b9c4b0d882895d7d11bb3dd3495f560123879ca2bc3cd6",
-  "publicationArtifacts": [
-    {
-      "path": "dist/remark-parse.cjs",
-      "sha256": "96e2dd128eed0278e40ddb2a76b516033dc127b3cfa5bdc7d862928b72c403c7"
-    },
-    {
-      "path": "dist/remark-parse.closed.js",
-      "sha256": "4fb4346ba64422e695f5995dadb5ee8abe3b856f9a1da67356671f5cdd5235e5"
+      "raw": 71908,
+      "gzip9": 26440,
+      "brotli11": 22331,
+      "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
     },
     {
       "path": "dist/remark-parse.esm.js",
-      "sha256": "6c212eb48eeda306c4542dbdac94c48d5342246da4ca4445888b1fd67d1136c5"
+      "raw": 71995,
+      "gzip9": 26508,
+      "brotli11": 22386,
+      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
+    }
+  ],
+  "timing": {
+    "primaryCompilerSeconds": 0.8671908378601074,
+    "primaryScope": "One compiler process for the shipped ESM (src/entry.lil, lilscript.toml)",
+    "packageSeconds": 1.9732699079977465,
+    "packageScope": "node scripts/build.mjs --compile --force; 2 compiler invocations plus package wrapping",
+    "originalSeconds": 5.095289249999041,
+    "originalScope": "npm run build"
+  },
+  "behavior": {
+    "command": "npm run check:types && node --test test/*.test.mjs test/official/index.js",
+    "summary": "Runtime checks: 18/18 pass.",
+    "exitCode": 0,
+    "logSha256": "9e672dfc8f5ec682a80b993707b09fafb58cf2d24c3fc8a1627ba8aea3295df3"
+  },
+  "primaryArtifact": "dist/remark-parse.esm.js",
+  "codecSha256": "125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9",
+  "publicationArtifacts": [
+    {
+      "path": "dist/remark-parse.cjs",
+      "sha256": "88bc42b8b92600520ba46cf55a432434833eb5664b2ed3cd8ffd8d45e90a8ba7"
+    },
+    {
+      "path": "dist/remark-parse.closed.js",
+      "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+    },
+    {
+      "path": "dist/remark-parse.esm.js",
+      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
     },
     {
       "path": "dist/remark-parse.umd.js",
-      "sha256": "f37819625dad6b17187a069e3a1700ca86c7764e995f0083603787294d03f5ac"
+      "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
     }
   ],
-  "publicationPolicy": "Retain previous public distribution; publish the diagnostic audit",
-  "publicationBase": "986f3242941155ce865b036d03ba2dc9381416bc",
-  "publicationSourceFingerprint": "cf0a9ae1d14eadb833f5af920ec44e56a96205114eca374b14170422cae52263",
+  "publicationPolicy": "Publish the compiler-written distribution",
+  "publicationBase": "4f37d3619fbaf9116e609131592bcfa781d8efbd",
+  "publicationSourceFingerprint": "fb77d7bb5491c3f050a1281516782c9db0bd51f67ecc168a7dcaae645af07959",
   "comparisonArtifacts": [
     {
       "path": "site/esm-comparison/original.js",
@@ -250,25 +169,25 @@
     },
     {
       "path": "site/esm-comparison/lilscript.js",
-      "sha256": "25d27d2d2e8a9415d514a5e5158657c239f7a24ea4adb3044fa20a968a051211"
+      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
     },
     {
       "path": "site/source-build.json",
-      "sha256": "cacf5d6373010ee12b4467329225e6414e7474674be968e2b436581477987d56"
+      "sha256": "198a48e730e8e7a3414dfeb574af69233471a597833ab90badf64406071107c9"
     },
     {
       "path": "site/comparison.json",
-      "sha256": "6d4340d69c8fdc9be913e57db790ff70c8b62225a6d407b20679f4bff096f16f"
+      "sha256": "efdaa19ac26e57af9736b6dfb0c343bc31ad1b8cc3152f96fdf9ce275881a215"
     }
   ],
   "sourceBuildReceipt": "comparison/source-build/result.json",
   "currentMeasurement": {
     "compiler": {
-      "commit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
-      "sha256": "0616048498eb9eb2e4bd75b39e8e6a083733ada647e16108edfee30ad183beeb"
+      "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
+      "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
     },
     "source": {
-      "commit": "e85337286c51d44ce2bd85a645de1734befe1ced"
+      "commit": "48cdf58 plus the release working tree (committed together with these records)"
     },
     "upstream": {
       "repository": "https://github.com/remarkjs/remark.git",
@@ -277,6 +196,6 @@
       "version": "11.0.0",
       "directory": "packages/remark-parse"
     },
-    "compatibility": "Runtime checks: 16/16 pass."
+    "compatibility": "Runtime checks: 18/18 pass."
   }
 }

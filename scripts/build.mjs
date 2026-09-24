@@ -1,5 +1,6 @@
 import {
   accessSync,
+  appendFileSync,
   constants,
   copyFileSync,
   existsSync,
@@ -10,20 +11,25 @@ import {
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { spawnSync } from "node:child_process"
-import { build as esbuild } from "esbuild"
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const lilscriptRoot = process.env.LILSCRIPT_ROOT ?? resolve(root, "..", "lilscript")
 const dist = resolve(root, "dist")
 const file = "remark-parse"
-const banner = "/*! @itslil/remark-parse 11.0.1 | LilScript reimplementation of remark-parse | MIT */\n"
+const { version } = JSON.parse(readFileSync(resolve(root, "package.json"), "utf8"))
+const banner = `/*! @itslil/remark-parse ${version} | LilScript reimplementation of remark-parse | MIT */\n`
+const publicApi = ["default"]
 
 function compilerPath() {
+  // A pinned compiler is used or the build fails; it never falls back to another binary.
+  if (process.env.LILSCRIPT_COMPILER) {
+    accessSync(process.env.LILSCRIPT_COMPILER, constants.X_OK)
+    return process.env.LILSCRIPT_COMPILER
+  }
   const candidates = [
-    process.env.LILSCRIPT_COMPILER,
     resolve(lilscriptRoot, "target", "release", "lilscript"),
     resolve(lilscriptRoot, "target", "debug", "lilscript"),
-  ].filter(Boolean)
+  ]
   for (const candidate of candidates) {
     try {
       accessSync(candidate, constants.X_OK)
@@ -34,13 +40,17 @@ function compilerPath() {
 }
 
 function run(cmd, args) {
+  const started = process.hrtime.bigint()
   const result = spawnSync(cmd, args, { cwd: root, stdio: "inherit" })
   if (result.status !== 0) process.exit(result.status ?? 1)
+  return Number(process.hrtime.bigint() - started) / 1e6
 }
 
-function compileLil(compiler, configName, outputName) {
-  run(compiler, [
-    resolve(root, "src", "entry.lil"),
+// LILSCRIPT_COMPILE_LOG names a file that receives one JSON line per compiler
+// invocation with its wall time; scripts/record-release.mjs reads it for the site.
+function compileLil(compiler, sourceName, configName, outputName) {
+  const wallMs = run(compiler, [
+    resolve(root, sourceName),
     "--target",
     "js-module",
     "--config",
@@ -48,10 +58,17 @@ function compileLil(compiler, configName, outputName) {
     "-o",
     resolve(dist, outputName),
   ])
+  if (process.env.LILSCRIPT_COMPILE_LOG) {
+    appendFileSync(
+      process.env.LILSCRIPT_COMPILE_LOG,
+      `${JSON.stringify({ source: sourceName, config: configName, output: outputName, wallMs })}\n`,
+    )
+  }
 }
 
 function compileIfRequested() {
-  if (!process.argv.includes("--compile") && existsSync(resolve(dist, `${file}.raw.js`))) {
+  const generated = [`${file}.raw.js`, `${file}.closed.js`]
+  if (!process.argv.includes("--compile") && generated.every((name) => existsSync(resolve(dist, name)))) {
     return
   }
   const compiler = compilerPath()
@@ -59,52 +76,61 @@ function compileIfRequested() {
     throw new Error("LilScript compiler not found. Set LILSCRIPT_COMPILER or build lilscript.")
   }
   mkdirSync(dist, { recursive: true })
-  compileLil(compiler, "lilscript.toml", `${file}.raw.js`)
-  compileLil(compiler, "lilscript.closed.toml", `${file}.closed.js`)
+  compileLil(compiler, "src/entry.lil", "lilscript.toml", `${file}.raw.js`)
+  compileLil(compiler, "src/entry.lil", "lilscript.closed.toml", `${file}.closed.js`)
+}
+
+// The compiler writes an ES module whose last statement is its export clause.
+// Every delivered file is that text: the ESM as written, and the CommonJS and
+// browser builds with the clause replaced by a module wrapper. No minifier runs
+// over the compiler's output.
+function splitExports(text, expected, label) {
+  const match = /;?export\s*\{([^}]*)\}\s*;?\s*$/.exec(text)
+  if (!match) throw new Error(`${label}: the compiler's artifact has no trailing export clause`)
+  const bindings = match[1].split(",").map((entry) => {
+    const [local, exported = local] = entry.trim().split(/\s+as\s+/)
+    return { local, exported }
+  })
+  const names = bindings.map(({ exported }) => exported).sort()
+  if (names.join(",") !== [...expected].sort().join(",")) {
+    throw new Error(`${label}: exports ${names.join(",")}, expected ${[...expected].sort().join(",")}`)
+  }
+  if (/\bimport\s*[{*\s"']|\bimport\.meta\b|\bexport\s/.test(text.slice(0, match.index))) {
+    throw new Error(`${label}: module syntax outside the trailing export clause`)
+  }
+  return { body: `${text.slice(0, match.index)};`, bindings }
+}
+
+function readCompiled(name) {
+  const path = resolve(dist, name)
+  if (!existsSync(path)) {
+    throw new Error(`dist/${name} is missing. Run with --compile after building LilScript.`)
+  }
+  return readFileSync(path, "utf8").trimEnd()
 }
 
 compileIfRequested()
 mkdirSync(dist, { recursive: true })
 
-const rawPath = resolve(dist, `${file}.raw.js`)
-if (!existsSync(rawPath)) {
-  throw new Error(`dist/${file}.raw.js is missing. Run with --compile after building LilScript.`)
-}
-
-writeFileSync(resolve(dist, `${file}.esm.js`), `${banner}${readFileSync(rawPath, "utf8").trimEnd()}\n`)
-
-await esbuild({
-  absWorkingDir: dist,
-  entryPoints: [resolve(dist, `${file}.esm.js`)],
-  outfile: resolve(dist, `${file}.cjs`),
-  bundle: true,
-  format: "cjs",
-  platform: "neutral",
-  legalComments: "none",
-  minifyWhitespace: true,
-  minifyIdentifiers: false,
-  minifySyntax: false,
-  banner: { js: banner },
-  logLevel: "error",
-})
-
-await esbuild({
-  absWorkingDir: dist,
-  entryPoints: [resolve(dist, `${file}.esm.js`)],
-  outfile: resolve(dist, `${file}.umd.js`),
-  bundle: true,
-  format: "iife",
-  globalName: "remarkParse",
-  footer: {
-    js: `globalThis.remarkParse=remarkParse.default||remarkParse;`,
-  },
-  legalComments: "none",
-  minifyWhitespace: true,
-  minifyIdentifiers: false,
-  minifySyntax: false,
-  banner: { js: banner },
-  logLevel: "error",
-})
+const raw = readCompiled(`${file}.raw.js`)
+const main = splitExports(raw, publicApi, `${file}.raw.js`)
+splitExports(readCompiled(`${file}.closed.js`), publicApi, `${file}.closed.js`)
+const plugin = main.bindings.find(({ exported }) => exported === "default").local
+writeFileSync(resolve(dist, `${file}.esm.js`), `${banner}${raw}\n`)
+// CommonJS: the default export on `exports.default`, flagged `__esModule` (not
+// enumerable) as the previous esbuild wrapper did, so transpiled
+// `import remarkParse from "@itslil/remark-parse"` keeps resolving to the plugin.
+writeFileSync(
+  resolve(dist, `${file}.cjs`),
+  `${banner}"use strict";${main.body}Object.defineProperty(exports,"__esModule",{value:!0});exports.default=${plugin};\n`,
+)
+// The browser build is a classic script: one function scope around the
+// compiler's program, and `remarkParse` on the global object, as upstream's
+// UMD consumers expect.
+writeFileSync(
+  resolve(dist, `${file}.umd.js`),
+  `${banner}(function(){"use strict";${main.body}globalThis.remarkParse=${plugin}})();\n`,
+)
 
 copyFileSync(resolve(root, "types", `${file}.d.ts`), resolve(dist, `${file}.d.ts`))
 console.log(`wrote dist/${file}.esm.js, dist/${file}.cjs, dist/${file}.umd.js, dist/${file}.closed.js`)

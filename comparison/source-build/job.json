@@ -7,9 +7,9 @@
     "directory": "packages/remark-parse"
   },
   "portSource": {
-    "commit": "e85337286c51d44ce2bd85a645de1734befe1ced"
+    "commit": "48cdf58 plus the release working tree (committed together with these records)"
   },
-  "compilerCommit": "4dc4e3337d9ffd758d65e3852682d6e13d9331c1",
+  "compilerCommit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
   "install": [
     "npm",
     "install",
