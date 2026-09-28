@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "name": "remark-parselil",
-  "startedAt": "2026-09-24T04:36:56Z",
+  "startedAt": "2026-09-28T11:03:19Z",
   "machine": {
     "provider": "Azure",
     "instanceClass": "Standard_B8als_v2",
@@ -13,19 +13,19 @@
     "node": "v24.11.1",
     "rayonThreads": 8,
     "loadAtStart": [
-      3.39306640625,
-      3.0986328125,
-      3.01220703125
+      1.2744140625,
+      1.12548828125,
+      1.27587890625
     ],
     "loadAtEnd": [
-      7.9921875,
-      4.32373046875,
-      3.43017578125
+      1.3388671875,
+      1.1591796875,
+      1.28125
     ]
   },
   "compiler": {
-    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
+    "commit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
+    "sha256": "47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041"
   },
   "source": {
     "repository": "https://github.com/remarkjs/remark.git",
@@ -35,7 +35,8 @@
     "directory": "packages/remark-parse"
   },
   "portSource": {
-    "commit": "48cdf58 plus the release working tree (committed together with these records)"
+    "commit": "083ba3684ab4cc9c92dfa59cf1cda978774f96cf",
+    "snapshot": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce"
   },
   "prerequisiteAdjustments": null,
   "steps": {
@@ -48,13 +49,13 @@
         "--no-fund"
       ],
       "cwd": "upstream",
-      "wallSeconds": 15.520651425002143,
-      "cpuSeconds": 21.745845,
+      "wallSeconds": 2.4190719630059903,
+      "cpuSeconds": 3.1520369999999995,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-install.log",
-      "logSha256": "c316ffc4ede8f0ce13b84f64ca830bd3bd6675ec74122392f19390dbd6686a0a",
-      "tail": "npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.\nnpm warn deprecated figgy-pudding@3.5.2: This module is no longer supported.\nnpm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead\nnpm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported\nnpm warn deprecated libnpmconfig@1.2.1: This module is not used anymore. npm config is parsed by npm itself and by @npmcli/config\nnpm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\nnpm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead\nnpm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\nnpm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\nnpm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me\nnpm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n\nadded 1550 packages in 15s\n"
+      "logSha256": "ce7bf91f54adc7390cff6bf1c2572fd00ce9cfbd0611637e273059c4710a80c9",
+      "tail": "\nup to date in 2s\n"
     },
     "original-build-1": {
       "command": [
@@ -63,8 +64,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 5.095289249999041,
-      "cpuSeconds": 7.649319000000001,
+      "wallSeconds": 3.070735515000706,
+      "cpuSeconds": 5.586626,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-1.log",
@@ -78,8 +79,8 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 1.9732699079977465,
-      "cpuSeconds": 1.6739940000000022,
+      "wallSeconds": 4.322204978998343,
+      "cpuSeconds": 4.315109,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-1.log",
@@ -88,35 +89,35 @@
       "invocations": [
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.raw.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js"
           ],
-          "startedAt": 1790224637.589467,
-          "wallSeconds": 0.8671908378601074,
+          "startedAt": 1790593404.5861182,
+          "wallSeconds": 2.387026071548462,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.raw.js",
-          "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js",
+          "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
         },
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.closed.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.closed.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.closed.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js"
           ],
-          "startedAt": 1790224638.4963644,
-          "wallSeconds": 0.6877942085266113,
+          "startedAt": 1790593407.0104272,
+          "wallSeconds": 1.800391674041748,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.closed.js",
-          "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js",
+          "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
         }
       ]
     },
@@ -127,8 +128,8 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 1.417090549999557,
-      "cpuSeconds": 1.3778269999999981,
+      "wallSeconds": 4.373165983997751,
+      "cpuSeconds": 4.343821000000001,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-2.log",
@@ -137,35 +138,35 @@
       "invocations": [
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.raw.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js"
           ],
-          "startedAt": 1790224639.295171,
-          "wallSeconds": 0.6312727928161621,
+          "startedAt": 1790593408.9090178,
+          "wallSeconds": 2.4038197994232178,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.raw.js",
-          "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js",
+          "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
         },
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.closed.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.closed.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.closed.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js"
           ],
-          "startedAt": 1790224639.9662523,
-          "wallSeconds": 0.6164016723632812,
+          "startedAt": 1790593411.3498209,
+          "wallSeconds": 1.810267686843872,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.closed.js",
-          "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js",
+          "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
         }
       ]
     },
@@ -176,8 +177,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 4.338439601000573,
-      "cpuSeconds": 6.8511840000000035,
+      "wallSeconds": 3.120796438997786,
+      "cpuSeconds": 5.703685000000002,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-2.log",
@@ -191,8 +192,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 9.182628022994322,
-      "cpuSeconds": 7.169171999999999,
+      "wallSeconds": 3.0708905779974884,
+      "cpuSeconds": 5.703965999999998,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-3.log",
@@ -206,8 +207,8 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 2.2270851389985182,
-      "cpuSeconds": 1.6471840000000029,
+      "wallSeconds": 4.372431363997748,
+      "cpuSeconds": 4.327962000000004,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-3.log",
@@ -216,48 +217,48 @@
       "invocations": [
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.raw.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js"
           ],
-          "startedAt": 1790224654.4262092,
-          "wallSeconds": 1.1407232284545898,
+          "startedAt": 1790593419.4770947,
+          "wallSeconds": 2.3815317153930664,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.raw.js",
-          "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js",
+          "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
         },
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.closed.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.closed.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.closed.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js"
           ],
-          "startedAt": 1790224655.652398,
-          "wallSeconds": 0.7484841346740723,
+          "startedAt": 1790593421.8954673,
+          "wallSeconds": 1.8199620246887207,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.closed.js",
-          "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js",
+          "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
         }
       ]
     },
     "original-esm": {
       "command": [
         "node",
-        "/home/azureuser/lilscript-work/release-m2/remark-parselil/source-build/tools/source-esm.mjs",
-        "/home/azureuser/lilscript-work/release-m2/remark-parselil/source-build",
+        "/home/azureuser/lilscript-work/release-0928/srcbuild/remark-parselil/source-build/tools/source-esm.mjs",
+        "/home/azureuser/lilscript-work/release-0928/srcbuild/remark-parselil/source-build",
         "remark-parselil"
       ],
       "cwd": "upstream",
-      "wallSeconds": 5.932421973004239,
-      "cpuSeconds": 5.658263,
+      "wallSeconds": 2.9705626040013158,
+      "cpuSeconds": 4.994713999999997,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-esm.log",
@@ -271,13 +272,13 @@
         "npm run check:types && node --test test/*.test.mjs test/official/index.js"
       ],
       "cwd": "port",
-      "wallSeconds": 3.0794297530010226,
-      "cpuSeconds": 4.07463900000001,
+      "wallSeconds": 1.5722667919981177,
+      "cpuSeconds": 3.193619999999996,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-tests.log",
-      "logSha256": "9e672dfc8f5ec682a80b993707b09fafb58cf2d24c3fc8a1627ba8aea3295df3",
-      "tail": "\n> @itslil/remark-parse@11.0.2 check:types\n> tsc --project tsconfig.json\n\n▶ remark-parse\n  ✔ exports only the upstream default (2.811067ms)\n  ✔ installs a parser that turns a heading into mdast (4.777442ms)\n  ✔ parses paragraphs, emphasis, strong, code, and lists (7.384417ms)\n  ✔ reads data keys at parse time (0.726692ms)\n  ✔ matches upstream property insertion order (3.456717ms)\n  ✔ keeps host-visible plugin keys in the library artifact (1.16327ms)\n✔ remark-parse (21.869063ms)\n▶ remark-parse closed\n  ✔ ships a closed artifact with the upstream export (2.175357ms)\n  ✔ parses through unified with unmangled parser and data keys (4.674789ms)\n✔ remark-parse closed (8.110386ms)\n▶ remark-parse\n  ✔ should expose the public api (2.821387ms)\n  ✔ should parse (4.839017ms)\n  ✔ should support extensions (8.191699ms)\n✔ remark-parse (17.20674ms)\n▶ package artifacts\n  ✔ loads the ESM and CommonJS exports (13.415497ms)\n  ✔ loads the closed export (12.952419ms)\n  ✔ exposes a callable UMD global (15.084657ms)\n✔ package artifacts (42.744484ms)\n▶ site\n  ✔ has a markedlil-style lab with receipts (80.743721ms)\n  ✔ records the compiler run it shows (0.560069ms)\n  ✔ shows the sizes of the files that ship (59.798406ms)\n✔ site (144.24266ms)\nℹ tests 18\nℹ suites 4\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 556.12906\n"
+      "logSha256": "64934ac281d37d3215473118b54145af10e5f29b1e1514dbd917cb2fde926cae",
+      "tail": "\n> @itslil/remark-parse@11.0.3 check:types\n> tsc --project tsconfig.json\n\n▶ remark-parse\n  ✔ exports only the upstream default (2.128157ms)\n  ✔ installs a parser that turns a heading into mdast (5.995855ms)\n  ✔ parses paragraphs, emphasis, strong, code, and lists (3.959499ms)\n  ✔ reads data keys at parse time (0.545372ms)\n  ✔ matches upstream property insertion order (2.209109ms)\n  ✔ keeps host-visible plugin keys in the library artifact (0.769441ms)\n✔ remark-parse (16.808815ms)\n▶ remark-parse closed\n  ✔ ships a closed artifact with the upstream export (2.859428ms)\n  ✔ parses through unified with unmangled parser and data keys (5.82806ms)\n✔ remark-parse closed (10.171038ms)\n▶ remark-parse\n  ✔ should expose the public api (1.834908ms)\n  ✔ should parse (5.179755ms)\n  ✔ should support extensions (6.915868ms)\n✔ remark-parse (15.171437ms)\n▶ package artifacts\n  ✔ loads the ESM and CommonJS exports (24.030116ms)\n  ✔ loads the closed export (10.936713ms)\n  ✔ exposes a callable UMD global (9.493909ms)\n✔ package artifacts (45.953174ms)\n▶ site\n  ✔ has a markedlil-style lab with receipts (2.97247ms)\n  ✔ records the compiler run it shows (4.577406ms)\n  ✔ shows the sizes of the files that ship (5.871302ms)\n✔ site (17.095843ms)\nℹ tests 18\nℹ suites 4\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 220.269346\n"
     }
   },
   "nativeBuilds": [
@@ -288,8 +289,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 5.095289249999041,
-      "cpuSeconds": 7.649319000000001,
+      "wallSeconds": 3.070735515000706,
+      "cpuSeconds": 5.586626,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-1.log",
@@ -303,8 +304,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 4.338439601000573,
-      "cpuSeconds": 6.8511840000000035,
+      "wallSeconds": 3.120796438997786,
+      "cpuSeconds": 5.703685000000002,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-2.log",
@@ -318,8 +319,8 @@
         "build"
       ],
       "cwd": "upstream",
-      "wallSeconds": 9.182628022994322,
-      "cpuSeconds": 7.169171999999999,
+      "wallSeconds": 3.0708905779974884,
+      "cpuSeconds": 5.703965999999998,
       "exitCode": 0,
       "timedOut": false,
       "log": "original-build-3.log",
@@ -335,8 +336,8 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 1.9732699079977465,
-      "cpuSeconds": 1.6739940000000022,
+      "wallSeconds": 4.322204978998343,
+      "cpuSeconds": 4.315109,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-1.log",
@@ -345,35 +346,35 @@
       "invocations": [
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.raw.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js"
           ],
-          "startedAt": 1790224637.589467,
-          "wallSeconds": 0.8671908378601074,
+          "startedAt": 1790593404.5861182,
+          "wallSeconds": 2.387026071548462,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.raw.js",
-          "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js",
+          "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
         },
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.closed.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.closed.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.closed.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js"
           ],
-          "startedAt": 1790224638.4963644,
-          "wallSeconds": 0.6877942085266113,
+          "startedAt": 1790593407.0104272,
+          "wallSeconds": 1.800391674041748,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.closed.js",
-          "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js",
+          "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
         }
       ]
     },
@@ -384,8 +385,8 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 1.417090549999557,
-      "cpuSeconds": 1.3778269999999981,
+      "wallSeconds": 4.373165983997751,
+      "cpuSeconds": 4.343821000000001,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-2.log",
@@ -394,35 +395,35 @@
       "invocations": [
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.raw.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js"
           ],
-          "startedAt": 1790224639.295171,
-          "wallSeconds": 0.6312727928161621,
+          "startedAt": 1790593408.9090178,
+          "wallSeconds": 2.4038197994232178,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.raw.js",
-          "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js",
+          "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
         },
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.closed.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.closed.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.closed.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js"
           ],
-          "startedAt": 1790224639.9662523,
-          "wallSeconds": 0.6164016723632812,
+          "startedAt": 1790593411.3498209,
+          "wallSeconds": 1.810267686843872,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.closed.js",
-          "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js",
+          "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
         }
       ]
     },
@@ -433,8 +434,8 @@
         "node scripts/build.mjs --compile --force"
       ],
       "cwd": "port",
-      "wallSeconds": 2.2270851389985182,
-      "cpuSeconds": 1.6471840000000029,
+      "wallSeconds": 4.372431363997748,
+      "cpuSeconds": 4.327962000000004,
       "exitCode": 0,
       "timedOut": false,
       "log": "lilscript-build-3.log",
@@ -443,35 +444,35 @@
       "invocations": [
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.raw.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js"
           ],
-          "startedAt": 1790224654.4262092,
-          "wallSeconds": 1.1407232284545898,
+          "startedAt": 1790593419.4770947,
+          "wallSeconds": 2.3815317153930664,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.raw.js",
-          "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.raw.js",
+          "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
         },
         {
           "args": [
-            "/home/azureuser/remark-parselil/src/entry.lil",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/src/entry.lil",
             "--target",
             "js-module",
             "--config",
-            "/home/azureuser/remark-parselil/lilscript.closed.toml",
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/lilscript.closed.toml",
             "-o",
-            "/home/azureuser/remark-parselil/dist/remark-parse.closed.js"
+            "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js"
           ],
-          "startedAt": 1790224655.652398,
-          "wallSeconds": 0.7484841346740723,
+          "startedAt": 1790593421.8954673,
+          "wallSeconds": 1.8199620246887207,
           "exitCode": 0,
-          "output": "/home/azureuser/remark-parselil/dist/remark-parse.closed.js",
-          "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+          "output": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce/dist/remark-parse.closed.js",
+          "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
         }
       ]
     }
@@ -496,19 +497,19 @@
     "external": [],
     "samples": [
       {
-        "bundleSeconds": 0.23059634200000004,
-        "wallSeconds": 2.048453823
+        "bundleSeconds": 0.028970676999999993,
+        "wallSeconds": 0.7281481360000001
       },
       {
-        "bundleSeconds": 0.19585365400000002,
-        "wallSeconds": 0.8009054700000001
+        "bundleSeconds": 0.018572900000000003,
+        "wallSeconds": 0.583890488
       },
       {
-        "bundleSeconds": 0.021608557999999903,
-        "wallSeconds": 0.6063474429999997
+        "bundleSeconds": 0.0213300670000001,
+        "wallSeconds": 0.570857235
       }
     ],
-    "medianSeconds": 0.8009054700000001,
+    "medianSeconds": 0.583890488,
     "toolchain": {
       "esbuild": "0.28.1",
       "terser": "5.51.2"
@@ -516,31 +517,31 @@
     "artifacts": [
       {
         "path": "original.esm.js",
-        "raw": 55705,
-        "gzip9": 15052,
-        "brotli11": 13399,
-        "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
+        "raw": 56328,
+        "gzip9": 15393,
+        "brotli11": 13727,
+        "sha256": "3fe8029d31ebde2c8954bf6dea1738c6fdfac2fa6f091db384913a4e06bbb4c2"
       },
       {
         "path": "original.unminified.js",
-        "raw": 138611,
-        "gzip9": 24703,
-        "brotli11": 21040,
-        "sha256": "76cdacf19b72fc7add9b9293a815e0855d963aa129179eb11a1b88620604646f"
+        "raw": 141402,
+        "gzip9": 25417,
+        "brotli11": 21676,
+        "sha256": "a2938369f6d4821b850dbe735744251bd891913672559a0ed5a754a56bfaf5be"
       },
       {
         "path": "original.terser-nomangle.js",
-        "raw": 90304,
-        "gzip9": 18478,
-        "brotli11": 16462,
-        "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
+        "raw": 91430,
+        "gzip9": 18932,
+        "brotli11": 16902,
+        "sha256": "2dd6b76d37dd0c5220f7647d16507d3c0df0dacc566a1bff657ced8a9974520f"
       },
       {
         "path": "original.esbuild.js",
-        "raw": 57083,
-        "gzip9": 16140,
-        "brotli11": 14395,
-        "sha256": "82adcd6011ee4dfba469ddceed357e8c892b8a4cdd712d86b8dfa6389ca39932"
+        "raw": 57694,
+        "gzip9": 16494,
+        "brotli11": 14718,
+        "sha256": "0062bbe350f1e6a19e0fd88bbbd3ee673fa145416122bb46854d64161b9b101e"
       }
     ],
     "inputs": [
@@ -557,6 +558,7 @@
       "node_modules/micromark/lib/compile.js",
       "node_modules/micromark-factory-space/index.js",
       "node_modules/micromark/lib/initialize/content.js",
+      "node_modules/micromark-util-edit-map/index.js",
       "node_modules/micromark/lib/initialize/document.js",
       "node_modules/micromark-util-classify-character/index.js",
       "node_modules/micromark-util-resolve-all/index.js",
@@ -566,6 +568,7 @@
       "node_modules/micromark-core-commonmark/lib/block-quote.js",
       "node_modules/micromark-core-commonmark/lib/character-escape.js",
       "node_modules/micromark-core-commonmark/lib/character-reference.js",
+      "node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js",
       "node_modules/micromark-core-commonmark/lib/code-fenced.js",
       "node_modules/micromark-core-commonmark/lib/code-indented.js",
       "node_modules/micromark-core-commonmark/lib/code-text.js",
@@ -611,62 +614,62 @@
   "lilscriptArtifacts": [
     {
       "path": "dist/remark-parse.umd.js",
-      "raw": 72028,
-      "gzip9": 26527,
-      "brotli11": 22402,
-      "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
+      "raw": 72342,
+      "gzip9": 26831,
+      "brotli11": 22733,
+      "sha256": "7e25116a36bea350e03e8f170dee38477852a24f1669816ab0d480a37d2711f7"
     },
     {
       "path": "dist/remark-parse.cjs",
-      "raw": 72060,
-      "gzip9": 26544,
-      "brotli11": 22437,
-      "sha256": "88bc42b8b92600520ba46cf55a432434833eb5664b2ed3cd8ffd8d45e90a8ba7"
+      "raw": 72374,
+      "gzip9": 26844,
+      "brotli11": 22714,
+      "sha256": "2e7c74ab3ba1badba32e82f8485092bda4ef42747f165ad2d887e3ff6ce7230e"
     },
     {
       "path": "dist/remark-parse.closed.js",
-      "raw": 74248,
-      "gzip9": 26594,
-      "brotli11": 22430,
-      "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+      "raw": 74649,
+      "gzip9": 26913,
+      "brotli11": 22705,
+      "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
     },
     {
       "path": "dist/remark-parse.raw.js",
-      "raw": 71908,
-      "gzip9": 26440,
-      "brotli11": 22331,
-      "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+      "raw": 72222,
+      "gzip9": 26742,
+      "brotli11": 22607,
+      "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
     },
     {
       "path": "dist/remark-parse.esm.js",
-      "raw": 71995,
-      "gzip9": 26508,
-      "brotli11": 22386,
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
+      "raw": 72309,
+      "gzip9": 26807,
+      "brotli11": 22697,
+      "sha256": "3a74ca5ed0a3c984948c6531419e8f62f7e48703c93a05bd4a55358362514157"
     }
   ],
   "nativeBuildsSummary": {
     "samples": 3,
     "successful": 3,
-    "medianSeconds": 5.095289249999041,
-    "minimumSeconds": 4.338439601000573,
-    "maximumSeconds": 9.182628022994322
+    "medianSeconds": 3.0708905779974884,
+    "minimumSeconds": 3.070735515000706,
+    "maximumSeconds": 3.120796438997786
   },
   "lilscriptBuildsSummary": {
     "samples": 3,
     "successful": 3,
-    "medianSeconds": 1.9732699079977465,
-    "minimumSeconds": 1.417090549999557,
-    "maximumSeconds": 2.2270851389985182
+    "medianSeconds": 4.372431363997748,
+    "minimumSeconds": 4.322204978998343,
+    "maximumSeconds": 4.373165983997751
   },
   "status": "complete",
-  "finishedAt": "2026-09-24T04:37:46Z",
+  "finishedAt": "2026-09-28T11:03:48Z",
   "sourceBuild": {
     "original": {
       "complete": true,
-      "medianSeconds": 5.095289249999041,
-      "minimumSeconds": 4.338439601000573,
-      "maximumSeconds": 9.182628022994322,
+      "medianSeconds": 3.0708905779974884,
+      "minimumSeconds": 3.070735515000706,
+      "maximumSeconds": 3.120796438997786,
       "samples": [
         {
           "command": [
@@ -674,8 +677,8 @@
             "run",
             "build"
           ],
-          "wallSeconds": 5.095289249999041,
-          "cpuSeconds": 7.649319000000001,
+          "wallSeconds": 3.070735515000706,
+          "cpuSeconds": 5.586626,
           "exitCode": 0,
           "timedOut": false,
           "log": "original-build-1.log",
@@ -687,8 +690,8 @@
             "run",
             "build"
           ],
-          "wallSeconds": 4.338439601000573,
-          "cpuSeconds": 6.8511840000000035,
+          "wallSeconds": 3.120796438997786,
+          "cpuSeconds": 5.703685000000002,
           "exitCode": 0,
           "timedOut": false,
           "log": "original-build-2.log",
@@ -700,8 +703,8 @@
             "run",
             "build"
           ],
-          "wallSeconds": 9.182628022994322,
-          "cpuSeconds": 7.169171999999999,
+          "wallSeconds": 3.0708905779974884,
+          "cpuSeconds": 5.703965999999998,
           "exitCode": 0,
           "timedOut": false,
           "log": "original-build-3.log",
@@ -711,9 +714,9 @@
     },
     "lilscript": {
       "complete": true,
-      "medianSeconds": 1.9732699079977465,
-      "minimumSeconds": 1.417090549999557,
-      "maximumSeconds": 2.2270851389985182,
+      "medianSeconds": 4.372431363997748,
+      "minimumSeconds": 4.322204978998343,
+      "maximumSeconds": 4.373165983997751,
       "samples": [
         {
           "command": [
@@ -721,8 +724,8 @@
             "-c",
             "node scripts/build.mjs --compile --force"
           ],
-          "wallSeconds": 1.9732699079977465,
-          "cpuSeconds": 1.6739940000000022,
+          "wallSeconds": 4.322204978998343,
+          "cpuSeconds": 4.315109,
           "exitCode": 0,
           "timedOut": false,
           "log": "lilscript-build-1.log",
@@ -734,8 +737,8 @@
             "-c",
             "node scripts/build.mjs --compile --force"
           ],
-          "wallSeconds": 1.417090549999557,
-          "cpuSeconds": 1.3778269999999981,
+          "wallSeconds": 4.373165983997751,
+          "cpuSeconds": 4.343821000000001,
           "exitCode": 0,
           "timedOut": false,
           "log": "lilscript-build-2.log",
@@ -747,8 +750,8 @@
             "-c",
             "node scripts/build.mjs --compile --force"
           ],
-          "wallSeconds": 2.2270851389985182,
-          "cpuSeconds": 1.6471840000000029,
+          "wallSeconds": 4.372431363997748,
+          "cpuSeconds": 4.327962000000004,
           "exitCode": 0,
           "timedOut": false,
           "log": "lilscript-build-3.log",

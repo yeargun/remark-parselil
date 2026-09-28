@@ -19,27 +19,28 @@ You publish the library lane. The closed artifact is `dist/remark-parse.closed.j
 
 ## Size and compile time
 
-Every delivered file is written by the LilScript compiler (revision `aa2052f0`, one
+Every delivered file is written by the LilScript compiler (revision `24968659`, one
 compiler); the build adds a license banner and, for CommonJS and the browser script, a
 module wrapper. No minifier runs after the compiler. Measured with `lilscript-codec`
 (Brotli-11 / gzip-9 / raw); the bars are the official `remark-parse@11.0.0` runtime graph
-bundled by esbuild, then minified. The Node graph is the like-for-like bar: it decodes
-named character references from an entity table, as this port does. Upstream's browser
-graph decodes them through the DOM and ships no table; against it this port loses.
+bundled by esbuild, then minified, with the dependencies Node resolves today (micromark
+4.0.3 and micromark-core-commonmark 2.0.4, released 2026-09-26, which this port mirrors).
+The Node graph is the like-for-like bar: it decodes named character references from an
+entity table, as this port does. Upstream's browser graph decodes them through the DOM and
+ships no table; against it this port loses.
 
 | File | Brotli-11 | gzip-9 | Raw |
 | --- | ---: | ---: | ---: |
-| `dist/remark-parse.esm.js` (npm) | **22,386** | 26,508 | 71,995 |
-| `dist/remark-parse.closed.js` | 22,430 | 26,594 | 74,248 |
-| Official Node graph, Terser (mangle on) | 23,171 | 26,914 | 84,339 |
-| Official Node graph, Oxc (Rolldown 1.2.5) | 23,339 | 27,112 | 84,436 |
-| Official Node graph, esbuild minify | 24,279 | 28,102 | 92,727 |
-| Official browser graph (no entity table), Terser | 13,399 | 15,052 | 55,705 |
-| Previous release (2026-09-02, old compiler route) | 26,205 | 30,903 | 89,641 |
+| `dist/remark-parse.esm.js` (npm) | **22,697** | 26,807 | 72,309 |
+| `dist/remark-parse.closed.js` | 22,705 | 26,913 | 74,649 |
+| Official Node graph, Terser (mangle on) | 23,499 | 27,233 | 84,959 |
+| Official Node graph, Oxc | 23,643 | 27,408 | 85,025 |
+| Official Node graph, esbuild minify | 24,586 | 28,463 | 93,338 |
+| Official browser graph (no entity table), Terser | 13,727 | 15,393 | 56,328 |
 
 The npm file carries an 87-byte license banner the bars do not; without it the compiler's
-output is 22,331 B Brotli-11. Compiling `src/entry.lil` for the npm file takes about 0.6 s
-of wall time (608.4 / 604.1 / 634 ms over three clean builds). `npm run record:release`
+output is 22,607 B Brotli-11. Compiling `src/entry.lil` for the npm file takes about
+2.4 s of wall time (2452.3 / 2388.1 / 2438.2 ms over three clean builds). `npm run record:release`
 re-measures all of this into `site/results.json`.
 
 The LilScript compiler lives next door at `../lilscript`.

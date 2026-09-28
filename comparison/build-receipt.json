@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "name": "remark-parselil",
-  "measuredAt": "2026-09-24T04:37:46Z",
+  "measuredAt": "2026-09-28T11:03:48Z",
   "status": "published",
   "buildPassed": true,
   "summary": "Rebuilt by the one LilScript compiler; every delivered file is compiler-written (a license banner and module wrappers are the only bytes the build adds).",
-  "sourceCommit": "48cdf58 plus the release working tree (committed together with these records)",
-  "previousPublicCommit": "4f37d3619fbaf9116e609131592bcfa781d8efbd",
+  "sourceCommit": "083ba3684ab4cc9c92dfa59cf1cda978774f96cf",
+  "previousPublicCommit": "fd629ce",
   "compiler": {
-    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9",
+    "commit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
+    "sha256": "47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041",
     "profile": "release",
     "dirty": false
   },
@@ -24,14 +24,14 @@
     "node": "v24.11.1",
     "rayonThreads": 8,
     "loadAtStart": [
-      3.39306640625,
-      3.0986328125,
-      3.01220703125
+      1.2744140625,
+      1.12548828125,
+      1.27587890625
     ],
     "loadAtEnd": [
-      7.9921875,
-      4.32373046875,
-      3.43017578125
+      1.3388671875,
+      1.1591796875,
+      1.28125
     ]
   },
   "upstream": {
@@ -45,149 +45,150 @@
   "sizes": {
     "current": {
       "path": "dist/remark-parse.esm.js",
-      "raw": 71995,
-      "gzip9": 26508,
-      "brotli11": 22386,
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
+      "raw": 72309,
+      "gzip9": 26807,
+      "brotli11": 22697,
+      "sha256": "3a74ca5ed0a3c984948c6531419e8f62f7e48703c93a05bd4a55358362514157"
     },
     "upstream": {
       "path": "original.esm.js",
-      "raw": 55705,
-      "gzip9": 15052,
-      "brotli11": 13399,
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
+      "raw": 56328,
+      "gzip9": 15393,
+      "brotli11": 13727,
+      "sha256": "3fe8029d31ebde2c8954bf6dea1738c6fdfac2fa6f091db384913a4e06bbb4c2"
     }
   },
   "officialArtifacts": [
     {
       "path": "original.esm.js",
-      "raw": 55705,
-      "gzip9": 15052,
-      "brotli11": 13399,
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
+      "raw": 56328,
+      "gzip9": 15393,
+      "brotli11": 13727,
+      "sha256": "3fe8029d31ebde2c8954bf6dea1738c6fdfac2fa6f091db384913a4e06bbb4c2"
     },
     {
       "path": "original.unminified.js",
-      "raw": 138611,
-      "gzip9": 24703,
-      "brotli11": 21040,
-      "sha256": "76cdacf19b72fc7add9b9293a815e0855d963aa129179eb11a1b88620604646f"
+      "raw": 141402,
+      "gzip9": 25417,
+      "brotli11": 21676,
+      "sha256": "a2938369f6d4821b850dbe735744251bd891913672559a0ed5a754a56bfaf5be"
     },
     {
       "path": "original.terser-nomangle.js",
-      "raw": 90304,
-      "gzip9": 18478,
-      "brotli11": 16462,
-      "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
+      "raw": 91430,
+      "gzip9": 18932,
+      "brotli11": 16902,
+      "sha256": "2dd6b76d37dd0c5220f7647d16507d3c0df0dacc566a1bff657ced8a9974520f"
     },
     {
       "path": "original.esbuild.js",
-      "raw": 57083,
-      "gzip9": 16140,
-      "brotli11": 14395,
-      "sha256": "82adcd6011ee4dfba469ddceed357e8c892b8a4cdd712d86b8dfa6389ca39932"
+      "raw": 57694,
+      "gzip9": 16494,
+      "brotli11": 14718,
+      "sha256": "0062bbe350f1e6a19e0fd88bbbd3ee673fa145416122bb46854d64161b9b101e"
     }
   ],
   "candidateArtifacts": [
     {
       "path": "dist/remark-parse.umd.js",
-      "raw": 72028,
-      "gzip9": 26527,
-      "brotli11": 22402,
-      "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
+      "raw": 72342,
+      "gzip9": 26831,
+      "brotli11": 22733,
+      "sha256": "7e25116a36bea350e03e8f170dee38477852a24f1669816ab0d480a37d2711f7"
     },
     {
       "path": "dist/remark-parse.cjs",
-      "raw": 72060,
-      "gzip9": 26544,
-      "brotli11": 22437,
-      "sha256": "88bc42b8b92600520ba46cf55a432434833eb5664b2ed3cd8ffd8d45e90a8ba7"
+      "raw": 72374,
+      "gzip9": 26844,
+      "brotli11": 22714,
+      "sha256": "2e7c74ab3ba1badba32e82f8485092bda4ef42747f165ad2d887e3ff6ce7230e"
     },
     {
       "path": "dist/remark-parse.closed.js",
-      "raw": 74248,
-      "gzip9": 26594,
-      "brotli11": 22430,
-      "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+      "raw": 74649,
+      "gzip9": 26913,
+      "brotli11": 22705,
+      "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
     },
     {
       "path": "dist/remark-parse.raw.js",
-      "raw": 71908,
-      "gzip9": 26440,
-      "brotli11": 22331,
-      "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
+      "raw": 72222,
+      "gzip9": 26742,
+      "brotli11": 22607,
+      "sha256": "f8c236bc66982b85bc1a9bdae9d6252117d12c5fe1af73b766bda58f11277b8c"
     },
     {
       "path": "dist/remark-parse.esm.js",
-      "raw": 71995,
-      "gzip9": 26508,
-      "brotli11": 22386,
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
+      "raw": 72309,
+      "gzip9": 26807,
+      "brotli11": 22697,
+      "sha256": "3a74ca5ed0a3c984948c6531419e8f62f7e48703c93a05bd4a55358362514157"
     }
   ],
   "timing": {
-    "primaryCompilerSeconds": 0.8671908378601074,
+    "primaryCompilerSeconds": 2.387026071548462,
     "primaryScope": "One compiler process for the shipped ESM (src/entry.lil, lilscript.toml)",
-    "packageSeconds": 1.9732699079977465,
+    "packageSeconds": 4.372431363997748,
     "packageScope": "node scripts/build.mjs --compile --force; 2 compiler invocations plus package wrapping",
-    "originalSeconds": 5.095289249999041,
+    "originalSeconds": 3.0708905779974884,
     "originalScope": "npm run build"
   },
   "behavior": {
     "command": "npm run check:types && node --test test/*.test.mjs test/official/index.js",
     "summary": "Runtime checks: 18/18 pass.",
     "exitCode": 0,
-    "logSha256": "9e672dfc8f5ec682a80b993707b09fafb58cf2d24c3fc8a1627ba8aea3295df3"
+    "logSha256": "64934ac281d37d3215473118b54145af10e5f29b1e1514dbd917cb2fde926cae"
   },
   "primaryArtifact": "dist/remark-parse.esm.js",
-  "codecSha256": "125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9",
+  "codecSha256": "85329d361ef3339d4ff7b7ca1f00065d561340eb4fc98a2799af327134a3a3f0",
   "publicationArtifacts": [
     {
       "path": "dist/remark-parse.cjs",
-      "sha256": "88bc42b8b92600520ba46cf55a432434833eb5664b2ed3cd8ffd8d45e90a8ba7"
+      "sha256": "2e7c74ab3ba1badba32e82f8485092bda4ef42747f165ad2d887e3ff6ce7230e"
     },
     {
       "path": "dist/remark-parse.closed.js",
-      "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
+      "sha256": "1d284f7eee27a0da1273c28e7404dc697be1b8b6dadbae67d57bcbc1d4aa563c"
     },
     {
       "path": "dist/remark-parse.esm.js",
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
+      "sha256": "3a74ca5ed0a3c984948c6531419e8f62f7e48703c93a05bd4a55358362514157"
     },
     {
       "path": "dist/remark-parse.umd.js",
-      "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
+      "sha256": "7e25116a36bea350e03e8f170dee38477852a24f1669816ab0d480a37d2711f7"
     }
   ],
   "publicationPolicy": "Publish the compiler-written distribution",
-  "publicationBase": "4f37d3619fbaf9116e609131592bcfa781d8efbd",
-  "publicationSourceFingerprint": "fb77d7bb5491c3f050a1281516782c9db0bd51f67ecc168a7dcaae645af07959",
+  "publicationBase": "fd629ce",
+  "publicationSourceFingerprint": "d0e5fe83fc69db95fb60988c23ee59e1d085214113ec3a3387dc25f1bfce2e5c",
   "comparisonArtifacts": [
     {
       "path": "site/esm-comparison/original.js",
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
+      "sha256": "3fe8029d31ebde2c8954bf6dea1738c6fdfac2fa6f091db384913a4e06bbb4c2"
     },
     {
       "path": "site/esm-comparison/lilscript.js",
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
+      "sha256": "3a74ca5ed0a3c984948c6531419e8f62f7e48703c93a05bd4a55358362514157"
     },
     {
       "path": "site/source-build.json",
-      "sha256": "198a48e730e8e7a3414dfeb574af69233471a597833ab90badf64406071107c9"
+      "sha256": "a05c2b554c619ee2451d5108b49fb2f2c6127e3fef0e42752948269627ae4a8a"
     },
     {
       "path": "site/comparison.json",
-      "sha256": "efdaa19ac26e57af9736b6dfb0c343bc31ad1b8cc3152f96fdf9ce275881a215"
+      "sha256": "0086612d2c845ba2bcdd285e937fbda3a7ef8d22a945162b07fe42134b0ff06e"
     }
   ],
   "sourceBuildReceipt": "comparison/source-build/result.json",
   "currentMeasurement": {
     "compiler": {
-      "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-      "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
+      "commit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
+      "sha256": "47048e41164027e92d3bf1d1840d8d83e04c60532c031ceb3346222e194b3041"
     },
     "source": {
-      "commit": "48cdf58 plus the release working tree (committed together with these records)"
+      "commit": "083ba3684ab4cc9c92dfa59cf1cda978774f96cf",
+      "snapshot": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce"
     },
     "upstream": {
       "repository": "https://github.com/remarkjs/remark.git",

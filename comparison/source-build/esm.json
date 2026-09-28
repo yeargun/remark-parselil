@@ -11,19 +11,19 @@
   "external": [],
   "samples": [
     {
-      "bundleSeconds": 0.23059634200000004,
-      "wallSeconds": 2.048453823
+      "bundleSeconds": 0.028970676999999993,
+      "wallSeconds": 0.7281481360000001
     },
     {
-      "bundleSeconds": 0.19585365400000002,
-      "wallSeconds": 0.8009054700000001
+      "bundleSeconds": 0.018572900000000003,
+      "wallSeconds": 0.583890488
     },
     {
-      "bundleSeconds": 0.021608557999999903,
-      "wallSeconds": 0.6063474429999997
+      "bundleSeconds": 0.0213300670000001,
+      "wallSeconds": 0.570857235
     }
   ],
-  "medianSeconds": 0.8009054700000001,
+  "medianSeconds": 0.583890488,
   "toolchain": {
     "esbuild": "0.28.1",
     "terser": "5.51.2"
@@ -31,31 +31,31 @@
   "artifacts": [
     {
       "path": "original.esm.js",
-      "raw": 55705,
-      "gzip9": 15052,
-      "brotli11": 13399,
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
+      "raw": 56328,
+      "gzip9": 15393,
+      "brotli11": 13727,
+      "sha256": "3fe8029d31ebde2c8954bf6dea1738c6fdfac2fa6f091db384913a4e06bbb4c2"
     },
     {
       "path": "original.unminified.js",
-      "raw": 138611,
-      "gzip9": 24703,
-      "brotli11": 21040,
-      "sha256": "76cdacf19b72fc7add9b9293a815e0855d963aa129179eb11a1b88620604646f"
+      "raw": 141402,
+      "gzip9": 25417,
+      "brotli11": 21676,
+      "sha256": "a2938369f6d4821b850dbe735744251bd891913672559a0ed5a754a56bfaf5be"
     },
     {
       "path": "original.terser-nomangle.js",
-      "raw": 90304,
-      "gzip9": 18478,
-      "brotli11": 16462,
-      "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
+      "raw": 91430,
+      "gzip9": 18932,
+      "brotli11": 16902,
+      "sha256": "2dd6b76d37dd0c5220f7647d16507d3c0df0dacc566a1bff657ced8a9974520f"
     },
     {
       "path": "original.esbuild.js",
-      "raw": 57083,
-      "gzip9": 16140,
-      "brotli11": 14395,
-      "sha256": "82adcd6011ee4dfba469ddceed357e8c892b8a4cdd712d86b8dfa6389ca39932"
+      "raw": 57694,
+      "gzip9": 16494,
+      "brotli11": 14718,
+      "sha256": "0062bbe350f1e6a19e0fd88bbbd3ee673fa145416122bb46854d64161b9b101e"
     }
   ],
   "inputs": [
@@ -72,6 +72,7 @@
     "node_modules/micromark/lib/compile.js",
     "node_modules/micromark-factory-space/index.js",
     "node_modules/micromark/lib/initialize/content.js",
+    "node_modules/micromark-util-edit-map/index.js",
     "node_modules/micromark/lib/initialize/document.js",
     "node_modules/micromark-util-classify-character/index.js",
     "node_modules/micromark-util-resolve-all/index.js",
@@ -81,6 +82,7 @@
     "node_modules/micromark-core-commonmark/lib/block-quote.js",
     "node_modules/micromark-core-commonmark/lib/character-escape.js",
     "node_modules/micromark-core-commonmark/lib/character-reference.js",
+    "node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js",
     "node_modules/micromark-core-commonmark/lib/code-fenced.js",
     "node_modules/micromark-core-commonmark/lib/code-indented.js",
     "node_modules/micromark-core-commonmark/lib/code-text.js",

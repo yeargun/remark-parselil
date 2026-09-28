@@ -7,9 +7,10 @@
     "directory": "packages/remark-parse"
   },
   "portSource": {
-    "commit": "48cdf58 plus the release working tree (committed together with these records)"
+    "commit": "083ba3684ab4cc9c92dfa59cf1cda978774f96cf",
+    "snapshot": "/home/azureuser/lilscript-work/release-0928/remark-parselil-fd629ce"
   },
-  "compilerCommit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
+  "compilerCommit": "249686599dc3bf1b6bf70dc9a030081b755bbb24",
   "install": [
     "npm",
     "install",
