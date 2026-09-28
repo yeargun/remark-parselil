@@ -1,6 +1,6 @@
 {
   "name": "@itslil/remark-parse",
-  "version": "11.0.2",
+  "version": "11.0.3",
   "description": "remark-parse reimplemented in LilScript",
   "keywords": [
     "remark",
