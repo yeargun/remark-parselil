@@ -54,7 +54,13 @@
     "README.md",
     "UPSTREAM.md"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/remark-parse.cjs",
+    "./dist/remark-parse.closed.js",
+    "./dist/remark-parse.esm.js",
+    "./dist/remark-parse.raw.js",
+    "./dist/remark-parse.umd.js"
+  ],
   "engines": {
     "node": ">=18"
   },

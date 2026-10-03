@@ -1,191 +1,157 @@
 {
-  "compiler": {
-    "baseRevision": "f7d29bd9",
-    "binarySha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
-    "hasLocalSourceChanges": true
-  },
-  "machine": {
-    "cpu": "AMD EPYC 7763 64-Core Processor",
-    "logicalCpus": 8,
-    "memoryGiB": 15.6,
-    "os": "Linux-7.0.0-1014-azure-x86_64-with-glibc2.39",
-    "node": "v20.19.0"
-  },
-  "lilscript": [
+  "version": 3,
+  "codec": "brotli",
+  "outputs": [
     {
-      "library": "remark-parselil",
-      "objective": "raw",
-      "command": [
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/bin/lilscript",
-        "--config",
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/configs/remark-parselil-raw.toml",
-        "--target",
-        "js-module",
-        "--mode",
-        "production",
-        "--jobs",
-        "1",
-        "--out-dir",
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/artifacts/remark-parselil/raw",
-        "--explain",
-        "json",
-        "--cache",
-        "off",
-        "--logical-work",
-        "8000000000"
+      "mode": "single",
+      "format": "esm",
+      "entries": [
+        {
+          "name": "index",
+          "file": "remark-parse.closed.js",
+          "dynamic": false,
+          "closure": [
+            "remark-parse.closed.js"
+          ],
+          "row": 23883,
+          "raw_row": 78524
+        }
       ],
-      "wallSeconds": 58.74289637200127,
-      "returncode": 0,
-      "compilerSha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
-      "configSha256": "1d20fc600168996586f49f009506c9cc06e4c1f3dd296b8f3edda7910945ea8e",
-      "measuredAt": "2026-10-03T13:57:54.936029+00:00",
-      "outputSha256": "1318a6d0c7fa9b227bd61571d623ab888dbda70454e5e9fe72d782828df7f5ef",
-      "raw": 73380
-    },
-    {
-      "library": "remark-parselil",
-      "objective": "gzip",
-      "command": [
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/bin/lilscript",
-        "--config",
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/configs/remark-parselil-gzip.toml",
-        "--target",
-        "js-module",
-        "--mode",
-        "production",
-        "--jobs",
-        "1",
-        "--out-dir",
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/artifacts/remark-parselil/gzip",
-        "--explain",
-        "json",
-        "--cache",
-        "off",
-        "--logical-work",
-        "8000000000"
+      "files": [
+        {
+          "file": "remark-parse.closed.js",
+          "role": "entry",
+          "source_map_for": null,
+          "label": [
+            "index"
+          ],
+          "modules": [
+            "entry.lil",
+            "from-markdown.lil",
+            "micromark/host.lil",
+            "micromark/parse.lil",
+            "micromark/util-combine-extensions.lil",
+            "micromark/util-chunked.lil",
+            "micromark/create-tokenizer.lil",
+            "micromark/util-character.lil",
+            "micromark/util-resolve-all.lil",
+            "micromark/initialize/content.lil",
+            "micromark/factory-space.lil",
+            "micromark/initialize/document.lil",
+            "micromark/util-edit-map.lil",
+            "micromark/initialize/flow.lil",
+            "micromark/core/blank-line.lil",
+            "micromark/symbol/types.lil",
+            "micromark/core/content.lil",
+            "micromark/util-subtokenize.lil",
+            "micromark/splice-buffer.lil",
+            "micromark/symbol/constants.lil",
+            "micromark/initialize/text.lil",
+            "micromark/constructs.lil",
+            "micromark/core/attention.lil",
+            "micromark/util-classify-character.lil",
+            "micromark/symbol/codes.lil",
+            "micromark/core/autolink.lil",
+            "micromark/core/block-quote.lil",
+            "micromark/core/character-escape.lil",
+            "micromark/core/character-reference.lil",
+            "micromark/decode-named.lil",
+            "micromark/character-entities.lil",
+            "micromark/core/code-fenced.lil",
+            "micromark/core/partial-non-lazy-continuation.lil",
+            "micromark/core/code-indented.lil",
+            "micromark/core/code-text.lil",
+            "micromark/core/definition.lil",
+            "micromark/factory-destination.lil",
+            "micromark/factory-label.lil",
+            "micromark/factory-title.lil",
+            "micromark/factory-whitespace.lil",
+            "micromark/util-normalize-identifier.lil",
+            "micromark/symbol/values.lil",
+            "micromark/core/hard-break-escape.lil",
+            "micromark/core/heading-atx.lil",
+            "micromark/core/html-flow.lil",
+            "micromark/util-html-tag-name.lil",
+            "micromark/core/html-text.lil",
+            "micromark/core/label-end.lil",
+            "micromark/core/label-start-image.lil",
+            "micromark/core/label-start-link.lil",
+            "micromark/core/line-ending.lil",
+            "micromark/core/list.lil",
+            "micromark/core/thematic-break.lil",
+            "micromark/core/setext-underline.lil",
+            "micromark/postprocess.lil",
+            "micromark/preprocess.lil",
+            "micromark/util-decode-numeric.lil",
+            "micromark/util-decode-string.lil",
+            "stringify-position.lil",
+            "to-string.lil"
+          ],
+          "anchored": true,
+          "imports": [],
+          "dynamic_imports": [],
+          "bytes": 78524,
+          "codec_bytes": 23883,
+          "sha256": "948e2aea060ef12107039d275bd1f813f704dd508558cd1e7637405c16c384f4"
+        }
       ],
-      "wallSeconds": 57.185582924008486,
-      "returncode": 0,
-      "compilerSha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
-      "configSha256": "6945714dadb3e07bcaade819d2b1ac80e32e34e3c6e8c78d94d22aabd3fcd2d3",
-      "measuredAt": "2026-10-03T13:58:52.129580+00:00",
-      "outputSha256": "8eaad55a3ca6dfa992c60e317ac5c9713300bd76e0c20238af71ffc843747251",
-      "raw": 77260
-    },
-    {
-      "library": "remark-parselil",
-      "objective": "brotli",
-      "command": [
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/bin/lilscript",
-        "--config",
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/configs/remark-parselil-brotli.toml",
-        "--target",
-        "js-module",
-        "--mode",
-        "production",
-        "--jobs",
-        "1",
-        "--out-dir",
-        "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/artifacts/remark-parselil/brotli",
-        "--explain",
-        "json",
-        "--cache",
-        "off",
-        "--logical-work",
-        "8000000000"
+      "side_effects": [
+        "remark-parse.closed.js"
       ],
-      "wallSeconds": 159.55043754600047,
-      "returncode": 0,
-      "compilerSha256": "8ff44fabb92c949e68240ce6541038fd52e2f3c04d1a9ac470031e4238541c3a",
-      "configSha256": "614f7d475cff3b1c66ba6921ed797d52214955056a40952a2805b752b666155f",
-      "measuredAt": "2026-10-03T14:01:31.686892+00:00",
-      "outputSha256": "f33b9b67ce3c789654b99da19e063705e11be8a72cd076fea36982d7ba8d2f9a",
-      "raw": 77131
+      "codec_total": 23883,
+      "rows_total": 23883,
+      "setters": 0,
+      "output": "primary",
+      "codec": "brotli",
+      "codec_settings": {
+        "brotli": {
+          "quality": 11,
+          "window": 22,
+          "mode": "generic"
+        },
+        "gzip": {
+          "level": 9,
+          "window": 15
+        }
+      },
+      "policy_fingerprint": [
+        123,
+        168,
+        88,
+        120,
+        18,
+        29,
+        200,
+        123,
+        51,
+        201,
+        16,
+        111,
+        239,
+        138,
+        152,
+        251,
+        147,
+        151,
+        119,
+        200,
+        5,
+        136,
+        180,
+        87,
+        2,
+        192,
+        75,
+        102,
+        220,
+        228,
+        64,
+        207
+      ]
     }
   ],
-  "upstream": {
-    "name": "remark-parselil",
-    "package": "remark-parse",
-    "version": "11.0.0",
-    "resolveDir": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/ports/remark-parselil",
-    "output": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil",
-    "entry": "export {default} from \"remark-parse\";",
-    "external": [],
-    "sharedExports": [
-      "default"
-    ],
-    "excludedExports": [],
-    "additionalExports": [],
-    "resolution": {
-      "platform": "neutral",
-      "conditions": [
-        "production"
-      ],
-      "mainFields": [
-        "module",
-        "main"
-      ],
-      "target": "es2020",
-      "defines": {
-        "process.env.NODE_ENV": "production"
-      },
-      "css": "excluded; measured JavaScript only"
-    },
-    "minifiers": [
-      {
-        "tool": "Terser",
-        "version": "5.51.2",
-        "esbuild": "0.28.1",
-        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil/terser.mjs",
-        "sha256": "3bb7aee39868255df5bdf1d1c4d420ef36f758246fbf28fab2643f4e1950f54f",
-        "raw": 84959,
-        "imports": [],
-        "wallSeconds": 1.2653215980000005,
-        "command": [
-          "/home/azureuser/.nvm/versions/node/v20.19.0/bin/node",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream.mjs",
-          "child",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil/job.json",
-          "Terser"
-        ]
-      },
-      {
-        "tool": "esbuild",
-        "version": "0.28.1",
-        "esbuild": "0.28.1",
-        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil/esbuild.mjs",
-        "sha256": "9291ac75ed84261553e082e25f383f8a95da7e5ca161b7de84ae61925f915304",
-        "raw": 93338,
-        "imports": [],
-        "wallSeconds": 0.10986299400000007,
-        "command": [
-          "/home/azureuser/.nvm/versions/node/v20.19.0/bin/node",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream.mjs",
-          "child",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil/job.json",
-          "esbuild"
-        ]
-      },
-      {
-        "tool": "Oxc",
-        "version": "via Vite 8.2.1",
-        "esbuild": "0.28.1",
-        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil/oxc.mjs",
-        "sha256": "ab1f194c1b17fb2f019077b50640954a92684c26a9eeed5dcbe7855584e46afa",
-        "raw": 85025,
-        "imports": [],
-        "wallSeconds": 0.20511436700000013,
-        "command": [
-          "/home/azureuser/.nvm/versions/node/v20.19.0/bin/node",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream.mjs",
-          "child",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/upstream/remark-parselil/job.json",
-          "Oxc"
-        ]
-      }
-    ]
-  },
-  "sourceInputs": {
+  "source_sha256": "d821efcac40d1fca76e2f1922ead4962236fa303c5293480a4e0836f3ce3ec20",
+  "inputs": {
     "root": 0,
     "entries": [
       {
@@ -862,53 +828,5 @@
     ],
     "host_modules": [],
     "host_reserved": []
-  },
-  "validation": {
-    "checks": 2082,
-    "runs": [
-      {
-        "objective": "raw",
-        "suite": "differential",
-        "checks": 694,
-        "command": [
-          "node",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
-          "validation/raw",
-          "remark-parselil"
-        ],
-        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/raw/remark-parselil/dist/index.mjs",
-        "ok": true
-      },
-      {
-        "objective": "gzip",
-        "suite": "differential",
-        "checks": 694,
-        "command": [
-          "node",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
-          "validation/gzip",
-          "remark-parselil"
-        ],
-        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/gzip/remark-parselil/dist/index.mjs",
-        "ok": true
-      },
-      {
-        "objective": "brotli",
-        "suite": "differential",
-        "checks": 694,
-        "command": [
-          "node",
-          "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/differential.mjs",
-          "validation/brotli",
-          "remark-parselil"
-        ],
-        "artifact": "/home/azureuser/lilscript-rebuild-reports/2026-10-03-site-refresh/validation/brotli/remark-parselil/dist/index.mjs",
-        "ok": true
-      }
-    ],
-    "ok": true,
-    "scope": "Current independent main-entry builds; package-format tests are recorded separately."
-  },
-  "workLimit": 8000000000,
-  "timingScope": "One sequential fresh-output build per objective/minifier. Upstream timing is ESM bundling and minification, not original-repository source compilation."
+  }
 }
