@@ -1,146 +1,12 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 3,
   "name": "remark-parselil",
-  "measuredAt": "2026-09-24T04:37:46Z",
-  "status": "published",
-  "buildPassed": true,
-  "summary": "Rebuilt by the one LilScript compiler; every delivered file is compiler-written (a license banner and module wrappers are the only bytes the build adds).",
-  "sourceCommit": "48cdf58 plus the release working tree (committed together with these records)",
-  "previousPublicCommit": "4f37d3619fbaf9116e609131592bcfa781d8efbd",
+  "measuredAt": "2026-10-01T16:43:45.928Z",
   "compiler": {
-    "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9",
-    "profile": "release",
-    "dirty": false
+    "commit": "aa2052f0",
+    "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
   },
-  "machine": {
-    "provider": "Azure",
-    "instanceClass": "Standard_B8als_v2",
-    "cpu": "AMD EPYC 7763 64-Core Processor",
-    "logicalCpus": 8,
-    "memoryBytes": 16706420736,
-    "os": "Ubuntu 24.04.3 LTS",
-    "kernel": "7.0.0-1014-azure",
-    "node": "v24.11.1",
-    "rayonThreads": 8,
-    "loadAtStart": [
-      3.39306640625,
-      3.0986328125,
-      3.01220703125
-    ],
-    "loadAtEnd": [
-      7.9921875,
-      4.32373046875,
-      3.43017578125
-    ]
-  },
-  "upstream": {
-    "name": "remark-parselil",
-    "package": "remark-parse",
-    "pinned": "11.0.0",
-    "latest": "11.0.0",
-    "source": "https://www.npmjs.com/package/remark-parse"
-  },
-  "comparisonScope": "remark-parse@11.0.0 public ESM runtime graph; dependency installation excluded; this is a comparison bundle build, not the upstream vendor release pipeline Sizes use canonical zlib 1.3.1 gzip-9 and Google Brotli 1.1.0 quality 11.",
-  "sizes": {
-    "current": {
-      "path": "dist/remark-parse.esm.js",
-      "raw": 71995,
-      "gzip9": 26508,
-      "brotli11": 22386,
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
-    },
-    "upstream": {
-      "path": "original.esm.js",
-      "raw": 55705,
-      "gzip9": 15052,
-      "brotli11": 13399,
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
-    }
-  },
-  "officialArtifacts": [
-    {
-      "path": "original.esm.js",
-      "raw": 55705,
-      "gzip9": 15052,
-      "brotli11": 13399,
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
-    },
-    {
-      "path": "original.unminified.js",
-      "raw": 138611,
-      "gzip9": 24703,
-      "brotli11": 21040,
-      "sha256": "76cdacf19b72fc7add9b9293a815e0855d963aa129179eb11a1b88620604646f"
-    },
-    {
-      "path": "original.terser-nomangle.js",
-      "raw": 90304,
-      "gzip9": 18478,
-      "brotli11": 16462,
-      "sha256": "bb50a3705e45fee239ec71607a8bf435024bd7e1fd274f06f116fcb6bdc06b72"
-    },
-    {
-      "path": "original.esbuild.js",
-      "raw": 57083,
-      "gzip9": 16140,
-      "brotli11": 14395,
-      "sha256": "82adcd6011ee4dfba469ddceed357e8c892b8a4cdd712d86b8dfa6389ca39932"
-    }
-  ],
-  "candidateArtifacts": [
-    {
-      "path": "dist/remark-parse.umd.js",
-      "raw": 72028,
-      "gzip9": 26527,
-      "brotli11": 22402,
-      "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
-    },
-    {
-      "path": "dist/remark-parse.cjs",
-      "raw": 72060,
-      "gzip9": 26544,
-      "brotli11": 22437,
-      "sha256": "88bc42b8b92600520ba46cf55a432434833eb5664b2ed3cd8ffd8d45e90a8ba7"
-    },
-    {
-      "path": "dist/remark-parse.closed.js",
-      "raw": 74248,
-      "gzip9": 26594,
-      "brotli11": 22430,
-      "sha256": "a4be33c8357b78e558799d305d69de72c69b80eef8ac22464efd20ce76492188"
-    },
-    {
-      "path": "dist/remark-parse.raw.js",
-      "raw": 71908,
-      "gzip9": 26440,
-      "brotli11": 22331,
-      "sha256": "391e736f238e1d0d5712bd51788d3f09bc1cf1fa10e6b561f1a81355c01a0545"
-    },
-    {
-      "path": "dist/remark-parse.esm.js",
-      "raw": 71995,
-      "gzip9": 26508,
-      "brotli11": 22386,
-      "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
-    }
-  ],
-  "timing": {
-    "primaryCompilerSeconds": 0.8671908378601074,
-    "primaryScope": "One compiler process for the shipped ESM (src/entry.lil, lilscript.toml)",
-    "packageSeconds": 1.9732699079977465,
-    "packageScope": "node scripts/build.mjs --compile --force; 2 compiler invocations plus package wrapping",
-    "originalSeconds": 5.095289249999041,
-    "originalScope": "npm run build"
-  },
-  "behavior": {
-    "command": "npm run check:types && node --test test/*.test.mjs test/official/index.js",
-    "summary": "Runtime checks: 18/18 pass.",
-    "exitCode": 0,
-    "logSha256": "9e672dfc8f5ec682a80b993707b09fafb58cf2d24c3fc8a1627ba8aea3295df3"
-  },
-  "primaryArtifact": "dist/remark-parse.esm.js",
-  "codecSha256": "125776830df72bbaf9704fee3c38bb0bf29bfc6bcceb5bc8707a0507a128d7b9",
+  "publicationSourceFingerprint": "fb77d7bb5491c3f050a1281516782c9db0bd51f67ecc168a7dcaae645af07959",
   "publicationArtifacts": [
     {
       "path": "dist/remark-parse.cjs",
@@ -159,43 +25,15 @@
       "sha256": "2723c3bf10f9f51afe4b48a91487c0ce2840b1d66f6ecc7a6612c166d7e3e23c"
     }
   ],
-  "publicationPolicy": "Publish the compiler-written distribution",
-  "publicationBase": "4f37d3619fbaf9116e609131592bcfa781d8efbd",
-  "publicationSourceFingerprint": "fb77d7bb5491c3f050a1281516782c9db0bd51f67ecc168a7dcaae645af07959",
   "comparisonArtifacts": [
-    {
-      "path": "site/esm-comparison/original.js",
-      "sha256": "47b6a1c9dca07a72c683983d2213c55bc84a487c592b24dee15f84086ff07468"
-    },
     {
       "path": "site/esm-comparison/lilscript.js",
       "sha256": "c04602339b5581828548f3df1182ad34f49d8f88754523d210e82d4c38c7d387"
     },
     {
-      "path": "site/source-build.json",
-      "sha256": "198a48e730e8e7a3414dfeb574af69233471a597833ab90badf64406071107c9"
-    },
-    {
-      "path": "site/comparison.json",
-      "sha256": "efdaa19ac26e57af9736b6dfb0c343bc31ad1b8cc3152f96fdf9ce275881a215"
+      "path": "site/esm-comparison/original.js",
+      "sha256": "741c276641544cd2eceb784fa0ea9975e266b22145d5d712d4b704dfb2462283"
     }
   ],
-  "sourceBuildReceipt": "comparison/source-build/result.json",
-  "currentMeasurement": {
-    "compiler": {
-      "commit": "aa2052f081ca8184666ca280ee9b91d476e46cfc",
-      "sha256": "13cb49a93fb3e376a5978484835322c84adea692b69ae4720775291377cf18f9"
-    },
-    "source": {
-      "commit": "48cdf58 plus the release working tree (committed together with these records)"
-    },
-    "upstream": {
-      "repository": "https://github.com/remarkjs/remark.git",
-      "commit": "de740c7d52c0278bbc36d8eac218ab74995c6420",
-      "package": "remark-parse",
-      "version": "11.0.0",
-      "directory": "packages/remark-parse"
-    },
-    "compatibility": "Runtime checks: 18/18 pass."
-  }
+  "comparisonScope": "remark-parse@11.0.0 public runtime graph, Node-compatible conditions; original and LilScript keep the same external dependencies (none). Original graph assembled with esbuild 0.28.1; minified separately with Terser 5.51.2 (three passes), Oxc (mangle on/off), and esbuild. Browser DOM-decoder diagnostics, when present, are excluded from the Node comparison baseline. Raw, gzip-9 and Brotli-11 are measured with the same canonical codec. The LilScript lane is the delivered package artifact."
 }
